@@ -1,0 +1,23 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: berlinspringboot
+
+  config:
+    import: optional:file:app.env[.properties]
+
+  datasource:
+    password: 'berlin'
+    url: jdbc:postgresql://localhost:5432/berlinspringboot
+    username: 'berlin'
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: true
+
