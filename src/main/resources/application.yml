@@ -9,9 +9,9 @@ spring:
     import: optional:file:app.env[.properties]
 
   datasource:
-    password: 'berlin'
+    password: berlin
     url: jdbc:postgresql://localhost:5432/berlinspringboot
-    username: 'berlin'
+    username: berlin
   jpa:
     hibernate:
       ddl-auto: update
@@ -20,4 +20,8 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
     show-sql: true
-
+  liquibase:
+    enabled: true
+    drop-first: false
+    change-log: classpath:db.changelog/db.changelog-master.xml
+    default-schema: public
