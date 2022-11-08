@@ -1,4 +1,4 @@
 package com.spaceyatech.berlin.utilities;
 
-public class BerlinUtils {
+public class Utils {
 }
