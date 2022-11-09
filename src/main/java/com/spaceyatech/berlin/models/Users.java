@@ -3,11 +3,8 @@ package com.spaceyatech.berlin.models;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
-import java.util.UUID;
+import java.sql.Timestamp;
 
 @Builder
 @Data
@@ -22,11 +19,20 @@ public class Users extends BaseEntity{
             strategy = "org.hibernate.id.UUIDGenerator"
     )
     private UUID userId;*/
-    private String firstname;
-    private String lastname;
+    @Column(length=50)
     private String username;
-    private String user_email;
+    @Column(length=50)
+    private String email;
+    @Column(length=60)
     private String password;
+    @Column(length=45)
+    private String phone_number;
+    @Column(length=45)
+    private String userscol;
+    @Column(length=45)
+    private String verification_code;
+    @Column(length=6)
+    private Timestamp date_created;
 
 
 }
