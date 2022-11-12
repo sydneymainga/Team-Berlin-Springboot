@@ -7,10 +7,8 @@
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
 
 
-    <changeSet author="user (generated)" id="1668072988502-1">
-        <createSequence incrementBy="50" maxValue="9223372036854775807" minValue="1" sequenceName="users_id_sequence" startValue="1"/>
-    </changeSet>
-    <changeSet author="user (generated)" id="1668072988502-2">
+
+    <changeSet author="user (generated)" id="1668247942801-1">
         <createTable tableName="accounts">
             <column name="id" type="UUID">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="accounts_pkey"/>
@@ -25,7 +23,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="user (generated)" id="1668072988502-3">
+    <changeSet author="user (generated)" id="1668247942801-2">
         <createTable tableName="blog_categories">
             <column name="id" type="UUID">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="blog_categories_pkey"/>
@@ -35,7 +33,7 @@
             <column name="category_name" type="VARCHAR(45)"/>
         </createTable>
     </changeSet>
-    <changeSet author="user (generated)" id="1668072988502-4">
+    <changeSet author="user (generated)" id="1668247942801-3">
         <createTable tableName="blog_categories_has_blog_posts">
             <column name="blog_categories_id" type="UUID">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="blog_categories_has_blog_posts_pkey"/>
@@ -45,7 +43,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="user (generated)" id="1668072988502-5">
+    <changeSet author="user (generated)" id="1668247942801-4">
         <createTable tableName="blog_post_images">
             <column name="id" type="UUID">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="blog_post_images_pkey"/>
@@ -54,7 +52,7 @@
             <column name="blog_post_imagescol" type="VARCHAR(45)"/>
         </createTable>
     </changeSet>
-    <changeSet author="user (generated)" id="1668072988502-6">
+    <changeSet author="user (generated)" id="1668247942801-5">
         <createTable tableName="blog_post_images_has_blog_posts">
             <column name="blog_post_images_blog_image_url" type="UUID">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="blog_post_images_has_blog_posts_pkey"/>
@@ -64,7 +62,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="user (generated)" id="1668072988502-7">
+    <changeSet author="user (generated)" id="1668247942801-6">
         <createTable tableName="blog_posts">
             <column name="id" type="UUID">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="blog_posts_pkey"/>
@@ -79,7 +77,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="user (generated)" id="1668072988502-8">
+    <changeSet author="user (generated)" id="1668247942801-7">
         <createTable tableName="role">
             <column name="id" type="UUID">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="role_pkey"/>
@@ -88,7 +86,7 @@
             <column name="role_col" type="VARCHAR(45)"/>
         </createTable>
     </changeSet>
-    <changeSet author="user (generated)" id="1668072988502-9">
+    <changeSet author="user (generated)" id="1668247942801-8">
         <createTable tableName="users">
             <column name="id" type="UUID">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="users_pkey"/>
@@ -102,7 +100,7 @@
             <column name="verification_code" type="VARCHAR(45)"/>
         </createTable>
     </changeSet>
-    <changeSet author="user (generated)" id="1668072988502-10">
+    <changeSet author="user (generated)" id="1668247942801-9">
         <createTable tableName="users_has_role">
             <column name="user_id" type="UUID">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="users_has_role_pkey"/>
@@ -112,28 +110,28 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="user (generated)" id="1668072988502-11">
+    <changeSet author="user (generated)" id="1668247942801-10">
         <addForeignKeyConstraint baseColumnNames="users_id" baseTableName="accounts" constraintName="fk25q8mjyonn0m217bte2hsni5i" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="users" />
     </changeSet>
-    <changeSet author="user (generated)" id="1668072988502-12">
+    <changeSet author="user (generated)" id="1668247942801-11">
         <addForeignKeyConstraint baseColumnNames="role_id" baseTableName="users_has_role" constraintName="fk4awrxb7h4whgo7qfodfn3wxvx" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="role" />
     </changeSet>
-    <changeSet author="user (generated)" id="1668072988502-13">
+    <changeSet author="user (generated)" id="1668247942801-12">
         <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="users_has_role" constraintName="fk7tol2j2en4ry01x30bqrlgh0r" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="users" />
     </changeSet>
-    <changeSet author="user (generated)" id="1668072988502-14">
+    <changeSet author="user (generated)" id="1668247942801-13">
         <addForeignKeyConstraint baseColumnNames="accounts_id" baseTableName="blog_posts" constraintName="fk9wqa90acub5gsrsysbh6jxggc" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="accounts" />
     </changeSet>
-    <changeSet author="user (generated)" id="1668072988502-15">
-        <addForeignKeyConstraint baseColumnNames="blogposts_id" baseTableName="blog_post_images_has_blog_posts" constraintName="fkdn4g9nd7xd1k4b3xnkvo8kpxj" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="blog_post_images"/>
+    <changeSet author="user (generated)" id="1668247942801-14">
+        <addForeignKeyConstraint baseColumnNames="blogposts_id" baseTableName="blog_post_images_has_blog_posts" constraintName="fkdn4g9nd7xd1k4b3xnkvo8kpxj" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="blog_post_images" />
     </changeSet>
-    <changeSet author="user (generated)" id="1668072988502-16">
+    <changeSet author="user (generated)" id="1668247942801-15">
         <addForeignKeyConstraint baseColumnNames="blogposts_id" baseTableName="blog_categories_has_blog_posts" constraintName="fkm0tmsawnwx59nytujxw5hcvkt" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="blog_categories" />
     </changeSet>
-    <changeSet author="user (generated)" id="1668072988502-17">
+    <changeSet author="user (generated)" id="1668247942801-16">
         <addForeignKeyConstraint baseColumnNames="blog_categories_id" baseTableName="blog_categories_has_blog_posts" constraintName="fkn74xrdagqcayqkk0rucgdn07x" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="blog_posts" />
     </changeSet>
-    <changeSet author="user (generated)" id="1668072988502-18">
+    <changeSet author="user (generated)" id="1668247942801-17">
         <addForeignKeyConstraint baseColumnNames="blog_post_images_blog_image_url" baseTableName="blog_post_images_has_blog_posts" constraintName="fks2k678ys9e3v5n2tsdxc3hmwg" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="blog_posts" />
     </changeSet>
 </databaseChangeLog>

@@ -1,5 +1,6 @@
 package com.spaceyatech.berlin.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -33,11 +34,23 @@ public class Users extends BaseEntity{
     @Column(name="date_created",length=6)
     private Timestamp date_created;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            })
     @JoinTable(name = "UsersHasRole",
             joinColumns = { @JoinColumn(name = "user_id") },
             inverseJoinColumns = { @JoinColumn(name = "role_id") })
     private Set<Role> role = new HashSet<>();
+
+
+
+//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+//    @JoinColumn(name = "user_id")
+//    private Set<Accounts> accounts = new HashSet<>();
+
+
 
 
 }

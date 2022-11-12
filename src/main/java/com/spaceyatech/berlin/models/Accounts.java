@@ -10,6 +10,9 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
+
 @Builder
 @Data
 @Entity
@@ -37,6 +40,10 @@ public class Accounts extends BaseEntity{
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private Users users;
+
+
+    // Set<Users> users = new HashSet<>();
+
 
 
 
