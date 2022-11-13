@@ -10,16 +10,14 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.HashSet;
-import java.util.Set;
 
 @Builder
 @Data
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="Accounts")
-public class Accounts extends BaseEntity{
+@Table(name="Account")
+public class Account extends BaseEntity{
     //fetch id from base entity class
     @Column(name="display_photo",length=60)
     private String display_photo;
@@ -39,7 +37,7 @@ public class Accounts extends BaseEntity{
     @JoinColumn(name = "users_id", nullable = false)//We also use the @JoinColumn annotation to specify the foreign key column
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
-    private Users users;
+    private User user;
 
 
     // Set<Users> users = new HashSet<>();

@@ -30,6 +30,6 @@ public class Role extends BaseEntity{
             },
             mappedBy = "role")
     @JsonIgnore
-    private Set<Users> users = new HashSet<>();
+    private Set<User> user = new HashSet<>();
 
 }

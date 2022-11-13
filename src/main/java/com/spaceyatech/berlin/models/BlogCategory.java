@@ -15,8 +15,8 @@ import java.util.Set;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="BlogCategories")
-public class BlogCategories extends BaseEntity{
+@Table(name="BlogCategory")
+public class BlogCategory extends BaseEntity{
     //fetch int from base entity
     @Column(name="category_name",length=45)
     private String category_name;
@@ -30,7 +30,7 @@ public class BlogCategories extends BaseEntity{
                     CascadeType.PERSIST,
                     CascadeType.MERGE
             },
-            mappedBy = "blogCategories")
+            mappedBy = "blogCategory")
     @JsonIgnore
-    private Set<BlogPosts> blogPosts = new HashSet<>();
+    private Set<BlogPost> blogPost = new HashSet<>();
 }

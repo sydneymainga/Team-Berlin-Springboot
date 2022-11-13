@@ -1,6 +1,5 @@
 package com.spaceyatech.berlin.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,7 +16,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name ="Users")
-public class Users extends BaseEntity{
+public class User extends BaseEntity{
 
     @Column(name="user_name",length=50)
     private String username;
@@ -43,14 +42,5 @@ public class Users extends BaseEntity{
             joinColumns = { @JoinColumn(name = "user_id") },
             inverseJoinColumns = { @JoinColumn(name = "role_id") })
     private Set<Role> role = new HashSet<>();
-
-
-
-//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-//    @JoinColumn(name = "user_id")
-//    private Set<Accounts> accounts = new HashSet<>();
-
-
-
 
 }

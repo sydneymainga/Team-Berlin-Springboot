@@ -3,7 +3,7 @@ Team Berlin Backend Written in Java Springboot For The SpaceYaTech Project
 # database
 This project has made use of postgresql database
 
-db name : berlinspringboot
+db name : berlin
 
 password: berlin
 

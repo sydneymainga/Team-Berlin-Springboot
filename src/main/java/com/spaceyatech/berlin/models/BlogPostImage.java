@@ -15,8 +15,8 @@ import java.util.Set;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="BlogPostImages")
-public class BlogPostImages extends BaseEntity{
+@Table(name="BlogPostImage")
+public class BlogPostImage extends BaseEntity{
 
     @Column(name="blog_image_url",length=1000)
     private String blog_image_url;
@@ -28,7 +28,7 @@ public class BlogPostImages extends BaseEntity{
                     CascadeType.PERSIST,
                     CascadeType.MERGE
             },
-            mappedBy = "blogPostImages")
+            mappedBy = "blogPostImage")
     @JsonIgnore
-    private Set<BlogPosts> blogPosts = new HashSet<>();
+    private Set<BlogPost> blogPost = new HashSet<>();
 }
