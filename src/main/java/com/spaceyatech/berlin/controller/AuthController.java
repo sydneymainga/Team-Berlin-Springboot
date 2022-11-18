@@ -11,9 +11,9 @@ import com.spaceyatech.berlin.response.JwtResponse;
 import com.spaceyatech.berlin.response.MessageResponse;
 import com.spaceyatech.berlin.security.jwt.JwtUtils;
 import com.spaceyatech.berlin.services.UserDetailss;
+import com.spaceyatech.berlin.utilities.Dry;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -51,6 +51,8 @@ public class AuthController {
     private PasswordEncoder encoder;
     @Autowired
     private JwtUtils jwtUtils;
+
+
 
 
     @PostMapping("/signin")
@@ -115,13 +117,18 @@ public class AuthController {
         }
 
         // Create new user's account
+        String date = Dry.getCurrentDate();
+
+        log.info("getcurrentdate:-->{}",date);
 
         User user = User.builder()
                 .username(signUpRequest.getUsername())
                 .email(signUpRequest.getEmail())
                 .password(encoder.encode(signUpRequest.getPassword()))
-                //.date_created("2022-11-18 19:20:19")//change to proper date
+                .date_created(Timestamp.valueOf(date))//change to proper date
                 .build();
+
+
 
         log.info("user being saved:-->{}",user.toString());
 
@@ -164,6 +171,8 @@ public class AuthController {
         }catch (Exception e){
             log.info("Error saving new user:-->{}",e.getMessage());
         }
+
+
        // userRepository.save(user);
 
         MessageResponse msg = MessageResponse.builder()
