@@ -25,3 +25,7 @@ spring:
     drop-first: false
     change-log: classpath:db.changelog/db.changelog-master.xml
     default-schema: public
+jwt-properties:
+            app:
+             jwtSecret: berlinSecretKey
+             jwtExpirationMs: 86400000

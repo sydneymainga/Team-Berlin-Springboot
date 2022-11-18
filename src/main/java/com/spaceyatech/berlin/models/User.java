@@ -1,20 +1,19 @@
 package com.spaceyatech.berlin.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 
-@Builder
-@Data
-@Entity
+@Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
+//@ToString
+@Entity
+@Builder
 @Table(name ="Users")
 public class User extends BaseEntity{
 
@@ -43,4 +42,18 @@ public class User extends BaseEntity{
             inverseJoinColumns = { @JoinColumn(name = "role_id") })
     private Set<Role> role = new HashSet<>();
 
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", phone_number='" + phone_number + '\'' +
+                ", userscol='" + userscol + '\'' +
+                ", verification_code='" + verification_code + '\'' +
+                ", date_created=" + date_created +
+                ", role=" + role +
+                '}';
+    }
 }
