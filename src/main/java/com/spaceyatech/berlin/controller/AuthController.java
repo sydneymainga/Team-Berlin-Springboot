@@ -3,8 +3,10 @@ package com.spaceyatech.berlin.controller;
 
 import com.spaceyatech.berlin.requests.LoginRequest;
 import com.spaceyatech.berlin.requests.SignUpRequest;
+import com.spaceyatech.berlin.requests.TokenRefreshRequest;
 import com.spaceyatech.berlin.response.JwtResponse;
 import com.spaceyatech.berlin.response.MessageResponse;
+import com.spaceyatech.berlin.response.TokenRefreshResponse;
 import com.spaceyatech.berlin.services.UserService;
 
 import lombok.AllArgsConstructor;
@@ -49,6 +51,16 @@ public class AuthController {
     public MessageResponse Register(@RequestBody @Valid SignUpRequest signUpRequest) {
 
         return userService.signUp(signUpRequest);
+
+
+    }
+
+    @PostMapping("/refresh-token")
+    public TokenRefreshResponse RefreshToken(@RequestBody @Valid TokenRefreshRequest tokenRefreshRequest) {
+
+        log.info(" RefreshToken to generate new access token:-->{}",tokenRefreshRequest);
+
+        return userService.genarateRefreshToken(tokenRefreshRequest);
 
 
     }

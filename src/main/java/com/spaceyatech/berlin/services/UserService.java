@@ -7,10 +7,14 @@ import com.spaceyatech.berlin.repository.RoleRepository;
 import com.spaceyatech.berlin.repository.UserRepository;
 import com.spaceyatech.berlin.requests.LoginRequest;
 import com.spaceyatech.berlin.requests.SignUpRequest;
+import com.spaceyatech.berlin.requests.TokenRefreshRequest;
 import com.spaceyatech.berlin.response.JwtResponse;
 import com.spaceyatech.berlin.response.MessageResponse;
+import com.spaceyatech.berlin.response.TokenRefreshResponse;
 import com.spaceyatech.berlin.security.jwt.JwtUtils;
 import com.spaceyatech.berlin.utilities.Dry;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +28,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -175,5 +180,40 @@ public class UserService {
 
         return msg;
 
+    }
+
+    public TokenRefreshResponse genarateRefreshToken(TokenRefreshRequest tokenRefreshRequest) {
+        log.info("old refresh-token requestBody():-->{}",tokenRefreshRequest);
+
+          String refresh_token = tokenRefreshRequest.getRefreshToken();
+
+        //logic to create refresh token
+        String newrefreshtoken="";
+        String newaccesstoken="";
+
+        if (refresh_token != null && jwtUtils.validateJwtToken(refresh_token)) {
+
+            String username = jwtUtils.getUserNameFromJwtToken(refresh_token);
+            log.info("username from refresh token:-->{}",username);
+
+            newrefreshtoken = jwtUtils.newRefreshToken(username);
+            newaccesstoken  = jwtUtils.newAccessToken(username);
+
+            log.info("newrefreshtoken:-->{} ,newaccesstoken:-->{}",newrefreshtoken,newaccesstoken);
+
+
+        }
+
+
+
+        TokenRefreshResponse tokenRefreshResponse = TokenRefreshResponse.builder()
+                .refreshToken(newrefreshtoken)
+                .accessToken(newaccesstoken)
+                .tokenType("Bearer")
+                .build();
+
+
+        log.info("new refresh-token/access-token responseBody():-->{}",tokenRefreshResponse);
+        return tokenRefreshResponse;
     }
 }

@@ -37,7 +37,7 @@ public class AuthTokenFilter extends OncePerRequestFilter {
             //get JWT from the Authorization header (by removing Bearer prefix)
             String jwt = parseJwt(request);
 
-            log.info("request auth:-->{}",request);
+
 
             //if the request has JWT, validate it, parse username from it
             if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
