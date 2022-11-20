@@ -37,6 +37,8 @@ public class AuthTokenFilter extends OncePerRequestFilter {
             //get JWT from the Authorization header (by removing Bearer prefix)
             String jwt = parseJwt(request);
 
+            log.info("request auth:-->{}",request);
+
             //if the request has JWT, validate it, parse username from it
             if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
 
@@ -51,7 +53,7 @@ public class AuthTokenFilter extends OncePerRequestFilter {
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                         userDetails, null, userDetails.getAuthorities());
 
-                log.info("authentication:-->{}",authentication);
+                log.info("authentication:-->{}",authentication.toString());
 
                 //set the current UserDetails in SecurityContext
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
@@ -60,6 +62,8 @@ public class AuthTokenFilter extends OncePerRequestFilter {
             }
         } catch (Exception e) {
             logger.error("Cannot set user authentication:--> {}", e);
+            response.setHeader("error",e.getMessage());
+            response.sendError(HttpServletResponse.SC_FORBIDDEN);
         }
 
         filterChain.doFilter(request, response);

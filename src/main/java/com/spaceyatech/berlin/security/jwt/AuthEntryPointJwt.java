@@ -20,5 +20,6 @@ public class AuthEntryPointJwt implements AuthenticationEntryPoint {
         log.error("Unauthorized error:--> {}", authException.getMessage());
         //HttpServletResponse.SC_UNAUTHORIZED is the 401 Status code.
         response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Error: Unauthorized" + authException.getMessage());
+        response.setHeader("error",authException.getMessage());
     }
 }

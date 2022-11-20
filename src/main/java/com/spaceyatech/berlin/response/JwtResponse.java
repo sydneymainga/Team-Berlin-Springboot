@@ -12,7 +12,8 @@ import java.util.UUID;
 @AllArgsConstructor
 public class JwtResponse {
 
-    private String token;
+    private String access_token;
+    private String refresh_token;
     private String type = "Bearer";
     private UUID id;
     private String username;

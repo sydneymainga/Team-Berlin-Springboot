@@ -17,7 +17,7 @@ import java.util.Date;
 public class JwtUtils {
 
    /**
-    * generate a JWT from username, date, expiration, secret
+    * generate a JWT/refresh token from username, date, expiration, secret
     * get username from JWT
     * validate a JWT
     * */
@@ -27,6 +27,9 @@ public class JwtUtils {
     @Value("${jwt-properties.app.jwtExpirationMs}")
     private int jwtExpirationMs;
 
+    @Value("${jwt-properties.app.refreshExpirationMs}")
+   private int refreshExpirationMs;  //refreshtoken lives for 100days
+
     public String generateJwtToken(Authentication authentication) {
 
         UserDetailss userPrincipal = (UserDetailss) authentication.getPrincipal();
@@ -34,10 +37,24 @@ public class JwtUtils {
         return Jwts.builder()
                 .setSubject((userPrincipal.getUsername()))
                 .setIssuedAt(new Date())
-                .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
+                .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs)) //expires after 1 day
                 .signWith(SignatureAlgorithm.HS512, jwtSecret)
                 .compact();
     }
+
+    public String generateJwtRefreshToken(Authentication authentication) {
+
+        UserDetailss userPrincipal = (UserDetailss) authentication.getPrincipal();
+
+        return Jwts.builder()
+                .setSubject((userPrincipal.getUsername()))
+                .setIssuedAt(new Date())
+                .setExpiration(new Date((new Date()).getTime() + refreshExpirationMs)) //expires after 10 days
+                .signWith(SignatureAlgorithm.HS512, jwtSecret)
+                .compact();
+    }
+
+
 
     public String getUserNameFromJwtToken(String token) {
         return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
