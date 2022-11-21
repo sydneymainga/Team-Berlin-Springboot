@@ -1,5 +1,6 @@
 package com.spaceyatech.berlin.security;
 
+import com.spaceyatech.berlin.enums.RoleName;
 import com.spaceyatech.berlin.security.jwt.AuthEntryPointJwt;
 import com.spaceyatech.berlin.security.jwt.AuthTokenFilter;
 import lombok.AllArgsConstructor;
@@ -20,6 +21,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import static org.springframework.http.HttpMethod.GET;
 
 @Configuration
 @EnableGlobalMethodSecurity(
@@ -76,6 +79,7 @@ public class WebSecurityConfig  {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests().antMatchers("/api/auth/**").permitAll()
                 .antMatchers("/api/test/**").permitAll()
+                .antMatchers("/api/admin/**").hasAuthority(""+RoleName.ROLE_ADMIN)
                 .anyRequest().authenticated();
 
         http.authenticationProvider(authenticationProvider());

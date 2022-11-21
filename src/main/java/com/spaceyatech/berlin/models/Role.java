@@ -13,7 +13,7 @@ import java.util.Set;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-//@ToString
+@ToString
 @Entity
 @Table(name="Role")
 public class Role extends BaseEntity{
@@ -33,12 +33,5 @@ public class Role extends BaseEntity{
     @JsonIgnore
     private Set<User> user = new HashSet<>();
 
-    @Override
-    public String toString() {
-        return "Role{" +
-                "name=" + name +
-                ", rolecol='" + rolecol + '\'' +
-                ", user=" + user +
-                '}';
-    }
+
 }

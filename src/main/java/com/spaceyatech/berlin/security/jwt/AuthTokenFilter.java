@@ -3,6 +3,7 @@ package com.spaceyatech.berlin.security.jwt;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -24,10 +25,11 @@ public class AuthTokenFilter extends OncePerRequestFilter {
 
     //filter that executes once per request.
 
-   // @Autowired
+
+    @Autowired
     private JwtUtils jwtUtils;
 
-   // @Autowired
+    @Autowired
     private UserDetailsService userDetailsService;
 
     @Override
@@ -61,7 +63,7 @@ public class AuthTokenFilter extends OncePerRequestFilter {
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
         } catch (Exception e) {
-            logger.error("Cannot set user authentication:--> {}", e);
+            log.error("Cannot set user authentication:--> {}",e.getMessage());
             response.setHeader("error",e.getMessage());
             response.sendError(HttpServletResponse.SC_FORBIDDEN);
         }

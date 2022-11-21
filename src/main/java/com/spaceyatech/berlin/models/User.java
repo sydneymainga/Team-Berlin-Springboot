@@ -11,7 +11,7 @@ import java.util.Set;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-//@ToString
+@ToString
 @Entity
 @Builder
 @Table(name ="Users")
@@ -43,17 +43,5 @@ public class User extends BaseEntity{
     private Set<Role> role = new HashSet<>();
 
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "username='" + username + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", phone_number='" + phone_number + '\'' +
-                ", userscol='" + userscol + '\'' +
-                ", verification_code='" + verification_code + '\'' +
-                ", date_created=" + date_created +
-                ", role=" + role +
-                '}';
-    }
+
 }

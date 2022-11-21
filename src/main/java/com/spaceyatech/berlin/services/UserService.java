@@ -8,6 +8,7 @@ import com.spaceyatech.berlin.repository.UserRepository;
 import com.spaceyatech.berlin.requests.LoginRequest;
 import com.spaceyatech.berlin.requests.SignUpRequest;
 import com.spaceyatech.berlin.requests.TokenRefreshRequest;
+import com.spaceyatech.berlin.response.AllUsersResponse;
 import com.spaceyatech.berlin.response.JwtResponse;
 import com.spaceyatech.berlin.response.MessageResponse;
 import com.spaceyatech.berlin.response.TokenRefreshResponse;
@@ -20,6 +21,7 @@ import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.json.GsonBuilderUtils;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -28,10 +30,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -215,5 +214,24 @@ public class UserService {
 
         log.info("new refresh-token/access-token responseBody():-->{}",tokenRefreshResponse);
         return tokenRefreshResponse;
+    }
+
+    public List<AllUsersResponse> allUsers(){
+
+        List<User> userList =  userRepository.findAll();
+        log.info("we have {} users ",userList.size()); //userList.size();
+
+        List<User> user= userList.stream().toList();
+
+
+        AllUsersResponse response = AllUsersResponse.builder()
+                .username(user.stream().map(User::getUsername).toList().toString())
+                .email(user.stream().map(User::getEmail).toList().toString())
+                .date_created(user.stream().map(User::getDate_created).toList().toString())
+                .build();
+
+        log.info("all users response:---------->{}",response);
+
+        return Collections.singletonList(response);
     }
 }
