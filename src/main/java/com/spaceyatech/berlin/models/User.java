@@ -43,5 +43,4 @@ public class User extends BaseEntity{
     private Set<Role> role = new HashSet<>();
 
 
-
 }

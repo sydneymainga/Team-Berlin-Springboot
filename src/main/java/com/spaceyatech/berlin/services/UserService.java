@@ -225,16 +225,21 @@ public class UserService {
         List<AllUsersResponse> allusers = new ArrayList<AllUsersResponse>();
         for(User user : userList){
 
-            AllUsersResponse allUsersResponse = new AllUsersResponse("","","","", Collections.singletonList(""));
+            AllUsersResponse allUsersResponse = new AllUsersResponse();
             allUsersResponse.setEmail(user.getEmail());
             allUsersResponse.setUsername(user.getUsername());
             allUsersResponse.setPhone_number(user.getPhone_number());
             allUsersResponse.setDate_created(""+user.getDate_created());
-            //allUsersResponse.setRole(Collections.singletonList( user.getRole()).stream().toList());
+
+            List<Role> roles=new ArrayList();
+
+            roles.addAll(user.getRole().stream().toList());
+
+            allUsersResponse.setRole(roles);
 
             allusers.add(allUsersResponse);
         }
-        log.info("all users response:---------->{}",allusers);
+       // log.info("all users response:---------->{}",allusers);
 
         return allusers;
 
