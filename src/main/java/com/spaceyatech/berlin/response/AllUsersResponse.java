@@ -9,6 +9,7 @@ import lombok.Singular;
 import javax.persistence.Column;
 import java.sql.Timestamp;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -20,8 +21,7 @@ public class AllUsersResponse {
     private String email;
     private String phone_number;
     private String date_created;
+    private List<String> role;
 
-    //@Builder.Default
-    //@Singular
-    private Set<Role> role = new HashSet<>();
+    //private Set<Role> role = new HashSet<>();
 }

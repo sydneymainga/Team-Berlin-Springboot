@@ -221,17 +221,25 @@ public class UserService {
         List<User> userList =  userRepository.findAll();
         log.info("we have {} users ",userList.size()); //userList.size();
 
-        List<User> user= userList.stream().toList();
+
+        List<AllUsersResponse> allusers = new ArrayList<AllUsersResponse>();
+        for(User user : userList){
+
+            AllUsersResponse allUsersResponse = new AllUsersResponse("","","","", Collections.singletonList(""));
+            allUsersResponse.setEmail(user.getEmail());
+            allUsersResponse.setUsername(user.getUsername());
+            allUsersResponse.setPhone_number(user.getPhone_number());
+            allUsersResponse.setDate_created(""+user.getDate_created());
+            //allUsersResponse.setRole(Collections.singletonList( user.getRole()).stream().toList());
+
+            allusers.add(allUsersResponse);
+        }
+        log.info("all users response:---------->{}",allusers);
+
+        return allusers;
 
 
-        AllUsersResponse response = AllUsersResponse.builder()
-                .username(user.stream().map(User::getUsername).toList().toString())
-                .email(user.stream().map(User::getEmail).toList().toString())
-                .date_created(user.stream().map(User::getDate_created).toList().toString())
-                .build();
 
-        log.info("all users response:---------->{}",response);
 
-        return Collections.singletonList(response);
     }
 }
