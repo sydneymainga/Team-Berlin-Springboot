@@ -1,5 +1,7 @@
 package com.spaceyatech.berlin.services;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.interfaces.DecodedJWT;
 import com.spaceyatech.berlin.enums.RoleName;
 import com.spaceyatech.berlin.models.Role;
 import com.spaceyatech.berlin.models.User;
@@ -186,16 +188,27 @@ public class UserService {
 
           String refresh_token = tokenRefreshRequest.getRefreshToken();
 
-        //logic to create refresh token
+        //logic to create new refresh/access token
         String newrefreshtoken="";
         String newaccesstoken="";
 
         if (refresh_token != null && jwtUtils.validateJwtToken(refresh_token)) {
 
+
+
             String username = jwtUtils.getUserNameFromJwtToken(refresh_token);
             log.info("username from refresh token:-->{}",username);
 
-            newrefreshtoken = jwtUtils.newRefreshToken(username);
+            DecodedJWT jwt = JWT.decode(refresh_token);
+            if( jwt.getExpiresAt().before(new Date())) {
+
+                log.info("-->refresh token is expired");
+                newrefreshtoken = jwtUtils.newRefreshToken(username);
+            }else{
+                log.info("-->refresh token not expired");
+                newrefreshtoken = refresh_token;
+            }
+           // newrefreshtoken = jwtUtils.newRefreshToken(username);
             newaccesstoken  = jwtUtils.newAccessToken(username);
 
             log.info("newrefreshtoken:-->{} ,newaccesstoken:-->{}",newrefreshtoken,newaccesstoken);
