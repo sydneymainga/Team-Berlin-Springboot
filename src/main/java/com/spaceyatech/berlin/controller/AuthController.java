@@ -14,10 +14,8 @@ import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -38,6 +36,7 @@ public class AuthController {
 
 
     @PostMapping("/signin")
+    @ResponseStatus( HttpStatus.ACCEPTED )
     public JwtResponse login( @Valid @RequestBody LoginRequest loginRequest) {
 
         JwtResponse response = userService.signIn(loginRequest);
@@ -48,6 +47,7 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
+    @ResponseStatus( HttpStatus.CREATED )
     public MessageResponse Register(@RequestBody @Valid SignUpRequest signUpRequest) {
 
         return userService.signUp(signUpRequest);
@@ -56,6 +56,7 @@ public class AuthController {
     }
 
     @PostMapping("/refresh-token")
+    @ResponseStatus( HttpStatus.CREATED )
     public TokenRefreshResponse RefreshToken(@RequestBody @Valid TokenRefreshRequest tokenRefreshRequest) {
 
         log.info(" RefreshToken to generate new access token:-->{}",tokenRefreshRequest);

@@ -239,6 +239,7 @@ public class UserService {
         for(User user : userList){
 
             AllUsersResponse allUsersResponse = new AllUsersResponse();
+            allUsersResponse.setId(user.getId());
             allUsersResponse.setEmail(user.getEmail());
             allUsersResponse.setUsername(user.getUsername());
             allUsersResponse.setPhone_number(user.getPhone_number());
