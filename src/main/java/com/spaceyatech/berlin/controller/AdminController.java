@@ -33,7 +33,7 @@ public class AdminController {
     @GetMapping( "/allusers")
     @SecurityRequirement(name = "Bearer Authentication")
     @Tag(name="Fetch all Users")
-    @ResponseStatus( HttpStatus.FOUND )
+    @ResponseStatus( HttpStatus.OK )
     public List<AllUsersResponse> fetchAllUsers(){
 
         return userService.allUsers();

@@ -16,6 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -37,24 +38,26 @@ public class AuthController {
 
 
     @PostMapping("/signin")
-    @ResponseStatus( HttpStatus.ACCEPTED )
+
     @Tag(name="UserSignIn")
-    public JwtResponse login( @Valid @RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<JwtResponse> login( @Valid @RequestBody LoginRequest loginRequest) {
 
         JwtResponse response = userService.signIn(loginRequest);
 
-        return response;
+        //return response;
+
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
+
 
 
     }
 
     @PostMapping("/signup")
     @Tag(name="UserSignUp")
-    @ResponseStatus( HttpStatus.CREATED )
-    public MessageResponse Register(@RequestBody @Valid SignUpRequest signUpRequest) {
+    public ResponseEntity<MessageResponse> Register(@RequestBody @Valid SignUpRequest signUpRequest) {
 
-        return userService.signUp(signUpRequest);
-
+        //return userService.signUp(signUpRequest);
+        return ResponseEntity.status(HttpStatus.CREATED).body( userService.signUp(signUpRequest));
 
     }
 

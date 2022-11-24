@@ -232,6 +232,7 @@ public class UserService {
     public List<AllUsersResponse> allUsers(){
 
         List<User> userList =  userRepository.findAll();
+
         log.info("we have {} users ",userList.size()); //userList.size();
 
 
@@ -257,8 +258,24 @@ public class UserService {
 
         return allusers;
 
+    }
+
+    public void saveRole(Role role){
+
+       //check if roles are present in db before we save them
+
+        Optional<Role> adminRole = roleRepository.findByName(RoleName.ROLE_ADMIN);
+        Optional<Role> userRole = roleRepository.findByName(RoleName.ROLE_USER);
+        Optional<Role> modRole = roleRepository.findByName(RoleName.ROLE_MODERATOR);
+
+        if(adminRole.isPresent() && userRole.isPresent() && modRole.isPresent()){
+            log.info("adminRole.isPresent():{} ,userRole.isPresent():{},modRole.isPresent() :{}",adminRole.isPresent(),userRole.isPresent() , modRole.isPresent());
+        }else{
+            log.info("we are saving this role on start up :{}",role);
+             roleRepository.save(role);
+        }
 
 
-
+        //return roleRepository.save(role);
     }
 }
