@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -31,6 +32,7 @@ public class AdminController {
 
     @GetMapping( "/allusers")
     @SecurityRequirement(name = "Bearer Authentication")
+    @Tag(name="Fetch all Users")
     @ResponseStatus( HttpStatus.FOUND )
     public List<AllUsersResponse> fetchAllUsers(){
 

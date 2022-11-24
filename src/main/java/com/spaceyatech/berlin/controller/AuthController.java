@@ -9,6 +9,7 @@ import com.spaceyatech.berlin.response.MessageResponse;
 import com.spaceyatech.berlin.response.TokenRefreshResponse;
 import com.spaceyatech.berlin.services.UserService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -37,6 +38,7 @@ public class AuthController {
 
     @PostMapping("/signin")
     @ResponseStatus( HttpStatus.ACCEPTED )
+    @Tag(name="UserSignIn")
     public JwtResponse login( @Valid @RequestBody LoginRequest loginRequest) {
 
         JwtResponse response = userService.signIn(loginRequest);
@@ -47,6 +49,7 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
+    @Tag(name="UserSignUp")
     @ResponseStatus( HttpStatus.CREATED )
     public MessageResponse Register(@RequestBody @Valid SignUpRequest signUpRequest) {
 
@@ -56,6 +59,7 @@ public class AuthController {
     }
 
     @PostMapping("/refresh-token")
+    @Tag(name="Renew Refresh Token")
     @ResponseStatus( HttpStatus.CREATED )
     public TokenRefreshResponse RefreshToken(@RequestBody @Valid TokenRefreshRequest tokenRefreshRequest) {
 
