@@ -63,12 +63,12 @@ public class AuthController {
 
     @PostMapping("/refresh-token")
     @Tag(name="Renew Refresh Token")
-    @ResponseStatus( HttpStatus.CREATED )
-    public TokenRefreshResponse RefreshToken(@RequestBody @Valid TokenRefreshRequest tokenRefreshRequest) {
+    public ResponseEntity<TokenRefreshResponse> RefreshToken(@RequestBody @Valid TokenRefreshRequest tokenRefreshRequest) {
 
         log.info(" RefreshToken to generate new access token:-->{}",tokenRefreshRequest);
+        return ResponseEntity.status(HttpStatus.CREATED).body( userService.genarateRefreshToken(tokenRefreshRequest));
 
-        return userService.genarateRefreshToken(tokenRefreshRequest);
+        //return userService.genarateRefreshToken(tokenRefreshRequest);
 
 
     }

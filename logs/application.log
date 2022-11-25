@@ -63,3 +63,11 @@
 24-11-2022 23:38:44.640 [restartedMain] INFO  c.s.berlin.services.UserService.saveRole - adminRole.isPresent():true ,userRole.isPresent():true, && modRole.isPresent() :true
 24-11-2022 23:38:44.648 [restartedMain] INFO  c.s.berlin.services.UserService.saveRole - adminRole.isPresent():true ,userRole.isPresent():true, && modRole.isPresent() :true
 24-11-2022 23:38:44.651 [restartedMain] INFO  c.s.berlin.services.UserService.saveRole - adminRole.isPresent():true ,userRole.isPresent():true, && modRole.isPresent() :true
+24-11-2022 23:49:03.199 [restartedMain] INFO  c.s.b.BerlinspringbootApplication.logStarting - Starting BerlinspringbootApplication using Java 19.0.1 on users-MacBook-Pro.local with PID 3279 (/Users/user/IdeaProjects/berlinspringboot/target/classes started by user in /Users/user/IdeaProjects/berlinspringboot)
+24-11-2022 23:49:03.202 [restartedMain] INFO  c.s.b.BerlinspringbootApplication.logStartupProfileInfo - No active profile set, falling back to 1 default profile: "default"
+24-11-2022 23:49:11.334 [restartedMain] INFO  c.s.b.BerlinspringbootApplication.logStarting - Starting BerlinspringbootApplication using Java 19.0.1 on users-MacBook-Pro.local with PID 3279 (/Users/user/IdeaProjects/berlinspringboot/target/classes started by user in /Users/user/IdeaProjects/berlinspringboot)
+24-11-2022 23:49:11.337 [restartedMain] INFO  c.s.b.BerlinspringbootApplication.logStartupProfileInfo - No active profile set, falling back to 1 default profile: "default"
+24-11-2022 23:49:18.274 [restartedMain] INFO  c.s.b.BerlinspringbootApplication.logStarted - Started BerlinspringbootApplication in 7.314 seconds (JVM running for 651.777)
+24-11-2022 23:49:18.513 [restartedMain] INFO  c.s.berlin.services.UserService.saveRole - adminRole.isPresent():true ,userRole.isPresent():true,modRole.isPresent() :true
+24-11-2022 23:49:18.527 [restartedMain] INFO  c.s.berlin.services.UserService.saveRole - adminRole.isPresent():true ,userRole.isPresent():true,modRole.isPresent() :true
+24-11-2022 23:49:18.543 [restartedMain] INFO  c.s.berlin.services.UserService.saveRole - adminRole.isPresent():true ,userRole.isPresent():true,modRole.isPresent() :true
