@@ -4,3 +4,39 @@
 25-11-2022 10:52:43.403 [restartedMain] INFO  c.s.berlin.services.UserService.saveRole - adminRole.isPresent():true ,userRole.isPresent():true,modRole.isPresent() :true
 25-11-2022 10:52:43.411 [restartedMain] INFO  c.s.berlin.services.UserService.saveRole - adminRole.isPresent():true ,userRole.isPresent():true,modRole.isPresent() :true
 25-11-2022 10:52:43.414 [restartedMain] INFO  c.s.berlin.services.UserService.saveRole - adminRole.isPresent():true ,userRole.isPresent():true,modRole.isPresent() :true
+25-11-2022 23:23:38.853 [restartedMain] INFO  c.s.b.BerlinspringbootApplication.logStarting - Starting BerlinspringbootApplication using Java 19.0.1 on users-MBP.mshome.net with PID 1087 (/Users/user/IdeaProjects/berlinspringboot/target/classes started by user in /Users/user/IdeaProjects/berlinspringboot)
+25-11-2022 23:23:38.866 [restartedMain] INFO  c.s.b.BerlinspringbootApplication.logStartupProfileInfo - No active profile set, falling back to 1 default profile: "default"
+25-11-2022 23:23:52.367 [restartedMain] INFO  c.s.b.BerlinspringbootApplication.logStarted - Started BerlinspringbootApplication in 44.788 seconds (JVM running for 46.375)
+25-11-2022 23:23:52.583 [restartedMain] INFO  c.s.berlin.services.UserService.saveRole - adminRole.isPresent():true ,userRole.isPresent():true,modRole.isPresent() :true
+25-11-2022 23:23:52.591 [restartedMain] INFO  c.s.berlin.services.UserService.saveRole - adminRole.isPresent():true ,userRole.isPresent():true,modRole.isPresent() :true
+25-11-2022 23:23:52.595 [restartedMain] INFO  c.s.berlin.services.UserService.saveRole - adminRole.isPresent():true ,userRole.isPresent():true,modRole.isPresent() :true
+25-11-2022 23:35:42.095 [restartedMain] INFO  c.s.b.BerlinspringbootApplication.logStarting - Starting BerlinspringbootApplication using Java 19.0.1 on users-MBP.mshome.net with PID 1232 (/Users/user/IdeaProjects/berlinspringboot/target/classes started by user in /Users/user/IdeaProjects/berlinspringboot)
+25-11-2022 23:35:42.110 [restartedMain] INFO  c.s.b.BerlinspringbootApplication.logStartupProfileInfo - No active profile set, falling back to 1 default profile: "default"
+25-11-2022 23:36:25.495 [restartedMain] INFO  c.s.b.BerlinspringbootApplication.logStarted - Started BerlinspringbootApplication in 74.387 seconds (JVM running for 75.727)
+25-11-2022 23:36:25.706 [restartedMain] INFO  c.s.berlin.services.UserService.saveRole - adminRole.isPresent():true ,userRole.isPresent():true,modRole.isPresent() :true
+25-11-2022 23:36:25.713 [restartedMain] INFO  c.s.berlin.services.UserService.saveRole - adminRole.isPresent():true ,userRole.isPresent():true,modRole.isPresent() :true
+25-11-2022 23:36:25.718 [restartedMain] INFO  c.s.berlin.services.UserService.saveRole - adminRole.isPresent():true ,userRole.isPresent():true,modRole.isPresent() :true
+25-11-2022 23:40:40.006 [http-nio-8080-exec-2] INFO  c.s.berlin.services.UserService.signUp - signup request:-->SignUpRequest(username=sydney7@gmail.com, email=sydney7@gmail.com, role=[admin, user], password=123456)
+25-11-2022 23:40:40.090 [http-nio-8080-exec-2] INFO  c.s.berlin.services.UserService.signUp - getcurrentdate:-->2022-40-25 11:40:40
+25-11-2022 23:40:40.247 [http-nio-8080-exec-2] INFO  c.s.berlin.services.UserService.signUp - Error saving new user:-->Timestamp format must be yyyy-mm-dd hh:mm:ss[.fffffffff]
+25-11-2022 23:40:40.248 [http-nio-8080-exec-2] INFO  c.s.berlin.services.UserService.signUp - Registered:-->MessageResponse(message=User registered successfully!)
+25-11-2022 23:50:41.941 [restartedMain] INFO  c.s.b.BerlinspringbootApplication.logStarting - Starting BerlinspringbootApplication using Java 19.0.1 on users-MBP.mshome.net with PID 1312 (/Users/user/IdeaProjects/berlinspringboot/target/classes started by user in /Users/user/IdeaProjects/berlinspringboot)
+25-11-2022 23:50:41.957 [restartedMain] INFO  c.s.b.BerlinspringbootApplication.logStartupProfileInfo - No active profile set, falling back to 1 default profile: "default"
+25-11-2022 23:51:04.146 [restartedMain] INFO  c.s.b.BerlinspringbootApplication.logStarted - Started BerlinspringbootApplication in 53.192 seconds (JVM running for 54.524)
+25-11-2022 23:51:04.344 [restartedMain] INFO  c.s.berlin.services.UserService.saveRole - adminRole.isPresent():true ,userRole.isPresent():true,modRole.isPresent() :true
+25-11-2022 23:51:04.352 [restartedMain] INFO  c.s.berlin.services.UserService.saveRole - adminRole.isPresent():true ,userRole.isPresent():true,modRole.isPresent() :true
+25-11-2022 23:51:04.355 [restartedMain] INFO  c.s.berlin.services.UserService.saveRole - adminRole.isPresent():true ,userRole.isPresent():true,modRole.isPresent() :true
+25-11-2022 23:51:18.209 [http-nio-8080-exec-1] INFO  c.s.berlin.services.UserService.signUp - signup request:-->SignUpRequest(username=sydney7@gmail.com, email=sydney7@gmail.com, role=[admin, user], password=123456)
+25-11-2022 23:51:18.276 [http-nio-8080-exec-1] INFO  c.s.berlin.services.UserService.signUp - getcurrentdate:-->2022-51-25 11:51:18
+25-11-2022 23:51:18.427 [http-nio-8080-exec-1] INFO  c.s.berlin.services.UserService.signUp - Error saving new user:-->Timestamp format must be yyyy-mm-dd hh:mm:ss[.fffffffff]
+26-11-2022 00:00:21.931 [restartedMain] INFO  c.s.b.BerlinspringbootApplication.logStarting - Starting BerlinspringbootApplication using Java 19.0.1 on users-MBP.mshome.net with PID 1438 (/Users/user/IdeaProjects/berlinspringboot/target/classes started by user in /Users/user/IdeaProjects/berlinspringboot)
+26-11-2022 00:00:21.942 [restartedMain] INFO  c.s.b.BerlinspringbootApplication.logStartupProfileInfo - No active profile set, falling back to 1 default profile: "default"
+26-11-2022 00:00:36.078 [restartedMain] INFO  c.s.b.BerlinspringbootApplication.logStarted - Started BerlinspringbootApplication in 45.186 seconds (JVM running for 46.336)
+26-11-2022 00:00:36.451 [restartedMain] INFO  c.s.berlin.services.UserService.saveRole - adminRole.isPresent():true ,userRole.isPresent():true,modRole.isPresent() :true
+26-11-2022 00:00:36.467 [restartedMain] INFO  c.s.berlin.services.UserService.saveRole - adminRole.isPresent():true ,userRole.isPresent():true,modRole.isPresent() :true
+26-11-2022 00:00:36.479 [restartedMain] INFO  c.s.berlin.services.UserService.saveRole - adminRole.isPresent():true ,userRole.isPresent():true,modRole.isPresent() :true
+26-11-2022 00:00:43.290 [http-nio-8080-exec-1] INFO  c.s.berlin.services.UserService.signUp - signup request:-->SignUpRequest(username=sydney7@gmail.com, email=sydney7@gmail.com, role=[admin, user], password=123456)
+26-11-2022 00:00:43.341 [http-nio-8080-exec-1] INFO  c.s.berlin.services.UserService.signUp - getcurrentdate:-->2022-11-26 12:00:43
+26-11-2022 00:00:43.504 [http-nio-8080-exec-1] INFO  c.s.berlin.services.UserService.signUp - user being saved:-->User(username=sydney7@gmail.com, email=sydney7@gmail.com, password=$2a$10$JEtfJfpNPJsbYT2XbVh4YO/eqqNQHT17wIbJ2JN3cb/aD5cIs14ka, phone_number=null, userscol=null, verification_code=null, date_created=2022-11-26 12:00:43.0, role=null)
+26-11-2022 00:00:43.633 [http-nio-8080-exec-1] INFO  c.s.berlin.services.UserService.signUp - Registered:-->MessageResponse(message=User registered successfully!)
+26-11-2022 00:01:07.519 [http-nio-8080-exec-3] INFO  c.s.berlin.services.UserService.signUp - signup request:-->SignUpRequest(username=sydney7@gmail.com, email=sydney7@gmail.com, role=[admin, user], password=123456)

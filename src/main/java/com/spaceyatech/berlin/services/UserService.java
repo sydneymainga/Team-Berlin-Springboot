@@ -97,6 +97,7 @@ public class UserService {
 
     public MessageResponse signUp(SignUpRequest signUpRequest){
 
+        MessageResponse msg;
 
 
         try{
@@ -166,18 +167,28 @@ public class UserService {
             user.setRole(roles);
 
 
+            try{
+                userRepository.save(user);
+                 msg = MessageResponse.builder()
+                        .message("User registered successfully!")
+                        .build();
+                log.info("Registered:-->{}",msg);
+            }catch (Exception e){
+                log.info("Registered:-->{}",e.getMessage());
+                msg = MessageResponse.builder()
+                        .message("User failed to register!"+e.getMessage())
+                        .build();
+                log.info("NOT Registered:-->{}",msg);
+            }
 
-            userRepository.save(user);
+
+
         }catch (Exception e){
             log.info("Error saving new user:-->{}",e.getMessage());
+            msg = MessageResponse.builder()
+                    .message("User failed to register!"+e.getMessage())
+                    .build();
         }
-
-
-        MessageResponse msg = MessageResponse.builder()
-                .message("User registered successfully!")
-                .build();
-        log.info("Registered:-->{}",msg);
-
 
         return msg;
 
