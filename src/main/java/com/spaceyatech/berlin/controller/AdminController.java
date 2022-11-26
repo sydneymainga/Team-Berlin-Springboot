@@ -27,6 +27,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/admin")
+@Tag(name="Admin Controller")
 @AllArgsConstructor
 @NoArgsConstructor
 @Slf4j
@@ -37,7 +38,7 @@ public class AdminController {
 
     @GetMapping( "/allusers")
     @SecurityRequirement(name = "Bearer Authentication")
-    @Tag(name="Fetch all Users")
+
     public ResponseEntity< List<AllUsersResponse>> fetchAllUsers(){
 
         //return userService.allUsers();
@@ -46,9 +47,9 @@ public class AdminController {
 
 
     }
-    @RequestMapping("/{id}")
+    @PostMapping("/{id}")
     @SecurityRequirement(name = "Bearer Authentication")
-    @Tag(name="Fetch User By id")
+
     public ResponseEntity<AllUsersResponse> fetchUserById( @PathVariable UUID id){
         log.info("user Id specified: -->{}",id);
 

@@ -24,6 +24,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/auth")
+@Tag(name="Auth Controller")
 @AllArgsConstructor
 @NoArgsConstructor
 
@@ -39,7 +40,6 @@ public class AuthController {
 
     @PostMapping("/signin")
 
-    @Tag(name="UserSignIn")
     public ResponseEntity<JwtResponse> login( @Valid @RequestBody LoginRequest loginRequest) {
 
         JwtResponse response = userService.signIn(loginRequest);
@@ -53,7 +53,7 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    @Tag(name="UserSignUp")
+
     public ResponseEntity<MessageResponse> Register(@RequestBody @Valid SignUpRequest signUpRequest) {
 
         //return userService.signUp(signUpRequest);
@@ -62,7 +62,7 @@ public class AuthController {
     }
 
     @PostMapping("/refresh-token")
-    @Tag(name="Renew Refresh Token")
+
     public ResponseEntity<TokenRefreshResponse> RefreshToken(@RequestBody @Valid TokenRefreshRequest tokenRefreshRequest) {
 
         log.info(" RefreshToken to generate new access token:-->{}",tokenRefreshRequest);
