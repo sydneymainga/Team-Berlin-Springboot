@@ -18,6 +18,7 @@ import com.spaceyatech.berlin.security.jwt.JwtUtils;
 import com.spaceyatech.berlin.utilities.Dry;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import liquibase.pro.packaged.A;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -174,17 +175,17 @@ public class UserService {
                         .build();
                 log.info("Registered:-->{}",msg);
             }catch (Exception e){
-                log.info("Registered:-->{}",e.getMessage());
+                log.error("Not Registered:-->{}",e.getMessage());
                 msg = MessageResponse.builder()
                         .message("User failed to register!"+e.getMessage())
                         .build();
-                log.info("NOT Registered:-->{}",msg);
+                log.error("NOT Registered:-->{}",msg);
             }
 
 
 
         }catch (Exception e){
-            log.info("Error saving new user:-->{}",e.getMessage());
+            log.error("Error saving new user:-->{}",e.getMessage());
             msg = MessageResponse.builder()
                     .message("User failed to register!"+e.getMessage())
                     .build();
@@ -267,6 +268,7 @@ public class UserService {
         }
        // log.info("all users response:---------->{}",allusers);
 
+
         return allusers;
 
     }
@@ -288,5 +290,28 @@ public class UserService {
 
 
         //return roleRepository.save(role);
+    }
+    public AllUsersResponse  findUserById(UUID id){
+
+       Optional<User>  userById =userRepository.findById(id);
+
+       AllUsersResponse response;
+       if(userById.isPresent()){
+           User user=userById.get();
+           response=new AllUsersResponse();
+           response.setId(user.getId());
+           response.setEmail(user.getEmail());
+           response.setUsername(user.getUsername());
+           response.setDate_created(""+user.getDate_created());
+           response.setRole(user.getRole().stream().toList());
+       }else{
+           log.info("user with id : {} not found ",id);
+           throw new RuntimeException("user with id " +id+ " not found");
+
+       }
+
+        log.info("user object response.. user id :{} username : {} user email :{} ",response.getId(),response.getUsername(),response.getEmail());
+
+       return response;
     }
 }

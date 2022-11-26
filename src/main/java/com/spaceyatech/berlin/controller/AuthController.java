@@ -46,7 +46,7 @@ public class AuthController {
 
         //return response;
 
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
 
 
 
