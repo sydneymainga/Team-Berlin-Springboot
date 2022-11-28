@@ -81,6 +81,7 @@ public class WebSecurityConfig  {
                 .antMatchers("/api/test/**").permitAll()
                 .antMatchers("/swagger-ui/**","/v3/api-docs/**").permitAll()  //http://localhost:8080/swagger-ui/index.html#
                 .antMatchers("/api/admin/**").hasAuthority(""+RoleName.ROLE_ADMIN)
+                .antMatchers("/api/v1/blogposts/**").hasAuthority(""+RoleName.ROLE_USER)
                 .anyRequest().authenticated();
 
         http.authenticationProvider(authenticationProvider());

@@ -11,7 +11,7 @@ import java.util.Date;
 public class Dry {
 
     public static final String getCurrentDate() {
-        String pattern = "yyyy-mm-dd hh:mm:ss";
+        String pattern = "yyyy-mm-dd hh:mm:ss"; // yyyy-mm-dd hh:mm:ss[.fffffffff]
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         String date = simpleDateFormat.format(new Date());
 

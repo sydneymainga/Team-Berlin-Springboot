@@ -97,6 +97,7 @@ public class UserService {
 
     public MessageResponse signUp(SignUpRequest signUpRequest){
 
+        MessageResponse msg;
 
 
         try{
@@ -125,7 +126,7 @@ public class UserService {
                     .username(signUpRequest.getUsername())
                     .email(signUpRequest.getEmail())
                     .password(encoder.encode(signUpRequest.getPassword()))
-                    .date_created(Timestamp.valueOf(date))//change to proper date
+//                    .date_created(Timestamp.valueOf(date)) //change to proper date
                     .build();
 
 
@@ -167,16 +168,31 @@ public class UserService {
 
 
 
-            userRepository.save(user);
+            try {
+                userRepository.save(user);
+                msg = MessageResponse.builder()
+                        .message("User registered successfully")
+                        .build();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                e.printStackTrace();
+                msg = MessageResponse.builder()
+                        .message("Failed saving user" + e.getMessage())
+                        .build();
+            }
+
         }catch (Exception e){
             log.info("Error saving new user:-->{}",e.getMessage());
+            msg = MessageResponse.builder()
+                    .message(e.getMessage())
+                    .build();
         }
 
 
-        MessageResponse msg = MessageResponse.builder()
-                .message("User registered successfully!")
-                .build();
-        log.info("Registered:-->{}",msg);
+//        MessageResponse msg = MessageResponse.builder()
+//                .message("User registered successfully!")
+//                .build();
+//        log.info("Registered:-->{}",msg);
 
 
         return msg;
