@@ -18,6 +18,7 @@ import com.spaceyatech.berlin.security.jwt.JwtUtils;
 import com.spaceyatech.berlin.utilities.Dry;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import liquibase.pro.packaged.A;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -126,7 +127,7 @@ public class UserService {
                     .username(signUpRequest.getUsername())
                     .email(signUpRequest.getEmail())
                     .password(encoder.encode(signUpRequest.getPassword()))
-//                    .date_created(Timestamp.valueOf(date)) //change to proper date
+                    .date_created(Timestamp.valueOf(date))//change to proper date
                     .build();
 
 
@@ -167,33 +168,28 @@ public class UserService {
             user.setRole(roles);
 
 
-
-            try {
+            try{
                 userRepository.save(user);
-                msg = MessageResponse.builder()
-                        .message("User registered successfully")
+                 msg = MessageResponse.builder()
+                        .message("User registered successfully!")
                         .build();
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-                e.printStackTrace();
+                log.info("Registered:-->{}",msg);
+            }catch (Exception e){
+                log.error("Not Registered:-->{}",e.getMessage());
                 msg = MessageResponse.builder()
-                        .message("Failed saving user" + e.getMessage())
+                        .message("User failed to register!"+e.getMessage())
                         .build();
+                log.error("NOT Registered:-->{}",msg);
             }
 
+
+
         }catch (Exception e){
-            log.info("Error saving new user:-->{}",e.getMessage());
+            log.error("Error saving new user:-->{}",e.getMessage());
             msg = MessageResponse.builder()
-                    .message(e.getMessage())
+                    .message("User failed to register!"+e.getMessage())
                     .build();
         }
-
-
-//        MessageResponse msg = MessageResponse.builder()
-//                .message("User registered successfully!")
-//                .build();
-//        log.info("Registered:-->{}",msg);
-
 
         return msg;
 
@@ -248,6 +244,7 @@ public class UserService {
     public List<AllUsersResponse> allUsers(){
 
         List<User> userList =  userRepository.findAll();
+
         log.info("we have {} users ",userList.size()); //userList.size();
 
 
@@ -271,10 +268,50 @@ public class UserService {
         }
        // log.info("all users response:---------->{}",allusers);
 
+
         return allusers;
 
+    }
+
+    public void saveRole(Role role){
+
+       //check if roles are present in db before we save them
+
+        Optional<Role> adminRole = roleRepository.findByName(RoleName.ROLE_ADMIN);
+        Optional<Role> userRole = roleRepository.findByName(RoleName.ROLE_USER);
+        Optional<Role> modRole = roleRepository.findByName(RoleName.ROLE_MODERATOR);
+
+        if(adminRole.isPresent() && userRole.isPresent() && modRole.isPresent()){
+            log.info("adminRole.isPresent():{} ,userRole.isPresent():{},modRole.isPresent() :{}",adminRole.isPresent(),userRole.isPresent() , modRole.isPresent());
+        }else{
+            log.info("we are saving this role on start up :{}",role);
+             roleRepository.save(role);
+        }
 
 
+        //return roleRepository.save(role);
+    }
+    public AllUsersResponse  findUserById(UUID id){
 
+       Optional<User>  userById =userRepository.findById(id);
+
+       AllUsersResponse response;
+       if(userById.isPresent()){
+           User user=userById.get();
+           response=new AllUsersResponse();
+           response.setId(user.getId());
+           response.setEmail(user.getEmail());
+           response.setUsername(user.getUsername());
+           response.setDate_created(""+user.getDate_created());
+           response.setRole(user.getRole().stream().toList());
+       }else{
+           log.info("user with id : {} not found ",id);
+           throw new RuntimeException("user with id " +id+ " not found");
+
+       }
+
+        log.info("user object response.. user id :{} username : {} user email :{} ",response.getId(),response.getUsername(),response.getEmail());
+
+       return response;
     }
 }

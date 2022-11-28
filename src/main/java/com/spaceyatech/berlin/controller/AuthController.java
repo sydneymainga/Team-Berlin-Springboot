@@ -9,12 +9,14 @@ import com.spaceyatech.berlin.response.MessageResponse;
 import com.spaceyatech.berlin.response.TokenRefreshResponse;
 import com.spaceyatech.berlin.services.UserService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -22,6 +24,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/auth")
+@Tag(name="Auth Controller")
 @AllArgsConstructor
 @NoArgsConstructor
 
@@ -36,32 +39,36 @@ public class AuthController {
 
 
     @PostMapping("/signin")
-    @ResponseStatus( HttpStatus.ACCEPTED )
-    public JwtResponse login( @Valid @RequestBody LoginRequest loginRequest) {
+
+    public ResponseEntity<JwtResponse> login( @Valid @RequestBody LoginRequest loginRequest) {
 
         JwtResponse response = userService.signIn(loginRequest);
 
-        return response;
+        //return response;
+
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+
 
 
     }
 
     @PostMapping("/signup")
-    @ResponseStatus( HttpStatus.CREATED )
-    public MessageResponse Register(@RequestBody @Valid SignUpRequest signUpRequest) {
 
-        return userService.signUp(signUpRequest);
+    public ResponseEntity<MessageResponse> Register(@RequestBody @Valid SignUpRequest signUpRequest) {
 
+        //return userService.signUp(signUpRequest);
+        return ResponseEntity.status(HttpStatus.CREATED).body( userService.signUp(signUpRequest));
 
     }
 
     @PostMapping("/refresh-token")
-    @ResponseStatus( HttpStatus.CREATED )
-    public TokenRefreshResponse RefreshToken(@RequestBody @Valid TokenRefreshRequest tokenRefreshRequest) {
+
+    public ResponseEntity<TokenRefreshResponse> RefreshToken(@RequestBody @Valid TokenRefreshRequest tokenRefreshRequest) {
 
         log.info(" RefreshToken to generate new access token:-->{}",tokenRefreshRequest);
+        return ResponseEntity.status(HttpStatus.CREATED).body( userService.genarateRefreshToken(tokenRefreshRequest));
 
-        return userService.genarateRefreshToken(tokenRefreshRequest);
+        //return userService.genarateRefreshToken(tokenRefreshRequest);
 
 
     }

@@ -79,7 +79,7 @@ public class WebSecurityConfig  {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests().antMatchers("/api/auth/**").permitAll()
                 .antMatchers("/api/test/**").permitAll()
-                .antMatchers("/swagger-ui/**","/v3/api-docs/**").permitAll()  //http://localhost:8080/swagger-ui/index.html#
+                .antMatchers("/swagger-ui/**","/v3/api-docs/**").permitAll()
                 .antMatchers("/api/admin/**").hasAuthority(""+RoleName.ROLE_ADMIN)
                 .antMatchers("/api/v1/blogposts/**").hasAuthority(""+RoleName.ROLE_USER)
                 .anyRequest().authenticated();
