@@ -8,10 +8,7 @@ import com.spaceyatech.berlin.response.BlogPostResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class BlogPostServiceImpl implements BlogPostService {
@@ -62,5 +59,43 @@ public class BlogPostServiceImpl implements BlogPostService {
             blogPostResponses.add(blogPostResponse);
         }
         return blogPostResponses;
+    }
+
+    @Override
+    public BlogPostResponse updateBlogPost(UUID blogPostId, BlogPostRequest blogPostRequest) {
+        BlogPost blogPostDB = blogPostRepository.findById(blogPostId).get();
+
+        if (Objects.nonNull(blogPostRequest.getBlogPostTitle()) &&
+                !"".equalsIgnoreCase(blogPostRequest.getBlogPostTitle())) {
+            blogPostDB.setPost_title(blogPostRequest.getBlogPostTitle());
+        }
+
+        if (Objects.nonNull(blogPostRequest.getBlogPostContent()) &&
+                !"".equalsIgnoreCase(blogPostRequest.getBlogPostContent())) {
+            blogPostDB.setPost_title(blogPostRequest.getBlogPostTitle());
+        }
+
+        if (Objects.nonNull(blogPostRequest.getBlogPostDescription()) &&
+                !"".equalsIgnoreCase(blogPostRequest.getBlogPostDescription())) {
+            blogPostDB.setPost_title(blogPostRequest.getBlogPostDescription());
+        }
+
+        return BlogPostResponse.builder()
+                .blogPostTitle(blogPostDB.getPost_title())
+                .blogPostContent(blogPostDB.getContent())
+                .blogPostDescription(blogPostDB.getBlog_description())
+                .build();
+    }
+
+    @Override
+    public String deleteBlogPost(UUID blogPostId) throws BlogPostNotFoundException {
+        Optional<BlogPost> blogPost = blogPostRepository.findById(blogPostId);
+
+        if (!blogPost.isPresent()) {
+            throw new BlogPostNotFoundException("Blog post not found");
+        }
+
+        blogPostRepository.deleteById(blogPostId);
+        return "Deleted successfully";
     }
 }

@@ -36,15 +36,13 @@ public class BlogPostController {
         return ResponseEntity.status(HttpStatus.OK).body(blogPostService.fetchAllBlogs());
     }
 
-    // TODO: Update a blog
     @PutMapping(value = "blogposts/{id}")
-    public ResponseEntity<?> updateBlogPost(BlogPostRequest blogPostRequest, Long blogPostId) {
-        return ResponseEntity.status(HttpStatus.CREATED).body("Not yet implemented");
+    public ResponseEntity<?> updateBlogPost(@PathVariable("id") UUID blogPostId, @Valid @RequestBody BlogPostRequest blogPostRequest) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(blogPostService.updateBlogPost(blogPostId, blogPostRequest));
     }
 
-    // TODO: Delete a blog
     @DeleteMapping(value = "blogposts/{id}")
-    public ResponseEntity<?> deleteBlogPost(Long blogPostId) throws BlogPostNotFoundException {
-        return ResponseEntity.status(HttpStatus.OK).body("Not yet implemented");
+    public ResponseEntity<String> deleteBlogPost(@PathVariable("id") UUID blogPostId) throws BlogPostNotFoundException {
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(blogPostService.deleteBlogPost(blogPostId));
     }
 }

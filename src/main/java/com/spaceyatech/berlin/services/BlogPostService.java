@@ -9,7 +9,12 @@ import java.util.UUID;
 
 public interface BlogPostService {
     BlogPostResponse saveBlog(BlogPostRequest blogPostRequest);
+
     BlogPostResponse fetchOneBlog(UUID blogPostId) throws BlogPostNotFoundException;
 
     List<BlogPostResponse> fetchAllBlogs();
+
+    BlogPostResponse updateBlogPost(UUID blogPostId, BlogPostRequest blogPostRequest);
+
+    String deleteBlogPost(UUID blogPostId) throws BlogPostNotFoundException;
 }
