@@ -68,7 +68,7 @@ public class UserService {
 
         log.info("authentication data:-->{}", authentication);
 
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+        SecurityContextHolder.getContext().setAuthentication(authentication);//This is where we store details of the present security context of the application, which includes details of the principal currently using the application.
         String access_token = jwtUtils.generateJwtToken(authentication);
         String refresh_token = jwtUtils.generateJwtRefreshToken(authentication);
 
