@@ -33,6 +33,7 @@ public class AccountService implements AccountInterface {
         String name = accountRequest.getName();
         UUID userId = accountRequest.getUserId();
         Account account;
+        Account createdAccount;
         if( name != null && !name.isEmpty() && userId !=null){
             //get user
             Optional<User> optionalUser = userRepository.findById(userId);
@@ -53,7 +54,7 @@ public class AccountService implements AccountInterface {
 
                 try{
                     //persist account details to db
-                    accountRepository.save(account);
+                    createdAccount =accountRepository.save(account);
                 }catch (Exception e){
                     log.info("failed to save account :{}",e.getMessage());
                     throw new RuntimeException("failed to save user account : "+e.toString());
@@ -71,11 +72,12 @@ public class AccountService implements AccountInterface {
 
         //build response
         AccountResponse accountResponse = AccountResponse.builder()
-                .name(account.getName())
-                .bioData(account.getBio_data())
-                .CreatedAT(account.getCreatedAT())
-                .UpdatedAT(account.getUpdatedAT())
-                .userId(account.getUser().getId())
+                .name(createdAccount.getName())
+                .bioData(createdAccount.getBio_data())
+                .CreatedAT(createdAccount.getCreatedAT())
+                .UpdatedAT(createdAccount.getUpdatedAT())
+                .userId(createdAccount.getUser().getId())
+                .accountId(createdAccount.getId())
                 .build();
         log.info("Account Created Response: {}",accountResponse);
 
@@ -87,6 +89,7 @@ public class AccountService implements AccountInterface {
     @Override
     public AccountResponse updateAccount(AccountRequest accountRequest,UUID accountId) {
        Account optionalAccount = accountRepository.findById(accountId).get();
+       Account updatedAccount;
 
        if(optionalAccount.getId()== accountId){
            //date
@@ -98,7 +101,8 @@ public class AccountService implements AccountInterface {
            optionalAccount.setDisplay_photo(accountRequest.getDisplayPhoto());
 
            try{
-               accountRepository.save(optionalAccount);
+               //just to make sure update was done
+              updatedAccount = accountRepository.save(optionalAccount);
 
            }catch (Exception e){
                log.error("failed to update account :{}",e.getMessage());
@@ -116,9 +120,13 @@ public class AccountService implements AccountInterface {
         //build response
         AccountResponse response = AccountResponse.builder()
 
-                .name(accountRequest.getName())
-                .bioData(accountRequest.getBioData())
-                .displayPhoto(accountRequest.getDisplayPhoto())
+                .name(updatedAccount.getName())
+                .bioData(updatedAccount.getBio_data())
+                .displayPhoto(updatedAccount.getDisplay_photo())
+                .CreatedAT(updatedAccount.getCreatedAT())
+                .UpdatedAT(updatedAccount.getUpdatedAT())
+                .userId(updatedAccount.getUser().getId())
+                .accountId(updatedAccount.getId())
 
                 .build();
         log.info("Account updated Response: {}",response);
@@ -202,7 +210,7 @@ public class AccountService implements AccountInterface {
         }
 
 
-
+        //https://medium.com/javarevisited/springboot-app-monitoring-with-grafana-prometheus-7c723f0dec15
 
         return response ;
 
