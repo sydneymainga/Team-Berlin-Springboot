@@ -7,7 +7,6 @@ import com.spaceyatech.berlin.repository.AccountRepository;
 import com.spaceyatech.berlin.repository.UserRepository;
 import com.spaceyatech.berlin.requests.AccountRequest;
 import com.spaceyatech.berlin.response.AccountResponse;
-import com.spaceyatech.berlin.response.AllUsersResponse;
 import com.spaceyatech.berlin.response.MessageResponse;
 import com.spaceyatech.berlin.utilities.Dry;
 import lombok.AllArgsConstructor;
@@ -142,7 +141,7 @@ public class AccountService implements AccountInterface {
         List<AccountResponse> response = new ArrayList<AccountResponse>();
         if(!optionalAccount.isEmpty()){
 
-
+             //builder pattern with a list
             for(Account account : optionalAccount){
 
                 AccountResponse accountResponse = AccountResponse.builder()
