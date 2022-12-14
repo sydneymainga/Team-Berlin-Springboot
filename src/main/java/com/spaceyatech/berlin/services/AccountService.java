@@ -8,6 +8,8 @@ import com.spaceyatech.berlin.repository.UserRepository;
 import com.spaceyatech.berlin.requests.AccountRequest;
 import com.spaceyatech.berlin.response.AccountResponse;
 import com.spaceyatech.berlin.response.MessageResponse;
+import com.spaceyatech.berlin.services.emailservice.EmailDetails;
+import com.spaceyatech.berlin.services.emailservice.EmailService;
 import com.spaceyatech.berlin.utilities.Dry;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,6 +27,8 @@ public class AccountService implements AccountInterface {
     private AccountRepository accountRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private EmailService emailService;
     @Override
     public AccountResponse createAccount(AccountRequest accountRequest) {
         log.info("create account request:{} ",accountRequest);
@@ -54,6 +58,18 @@ public class AccountService implements AccountInterface {
                 try{
                     //persist account details to db
                     createdAccount =accountRepository.save(account);
+                    //TODO:send email
+                    //building the email content
+                    String emailBody= "Dear "+createdAccount.getUser()+
+                            ",\nYour account has been created successfully";
+
+                    EmailDetails details = EmailDetails.builder()
+                            .subject("Account Created Successfully")
+                            .recipient(createdAccount.getUser().getEmail())//email
+                            .emailBody(emailBody)
+                            .build();
+                    //sending email
+                    emailService.sendEmail(details);
                 }catch (Exception e){
                     log.info("failed to save account :{}",e.getMessage());
                     throw new RuntimeException("failed to save user account : "+e.toString());

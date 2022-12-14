@@ -15,6 +15,9 @@ import com.spaceyatech.berlin.response.JwtResponse;
 import com.spaceyatech.berlin.response.MessageResponse;
 import com.spaceyatech.berlin.response.TokenRefreshResponse;
 import com.spaceyatech.berlin.security.jwt.JwtUtils;
+import com.spaceyatech.berlin.services.emailservice.EmailDetails;
+import com.spaceyatech.berlin.services.emailservice.EmailService;
+import com.spaceyatech.berlin.services.emailservice.EmailServiceInterface;
 import com.spaceyatech.berlin.utilities.Dry;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -51,6 +54,9 @@ public class UserService {
     private PasswordEncoder encoder;
     @Autowired
     private JwtUtils jwtUtils;
+
+    @Autowired
+    private EmailService emailService;
 
     public JwtResponse signIn(LoginRequest loginRequest){
 
@@ -165,12 +171,27 @@ public class UserService {
 
 
             try{
-                userRepository.save(user);
+              User userdetails =  userRepository.save(user);
+
                 //TODO: we can send email alert
+                //building the email content
+                String emailBody= "Dear "+userdetails.getUsername()+
+                                  ",\nWelcome to SpaceYaTech,Your a user account has been created successfully";
+
+                EmailDetails details = EmailDetails.builder()
+                        .subject("Successfully Registered")
+                        .recipient(userdetails.getEmail())//email
+                        .emailBody(emailBody)
+                .build();
+                //sending email
+                emailService.sendEmail(details);
+
                  msg = MessageResponse.builder()
                         .message("User registered successfully!")
                         .build();
+
                 log.info("Registered:-->{}",msg);
+
             }catch (Exception e){
                 log.error("Not Registered:-->{}",e.getMessage());
                 msg = MessageResponse.builder()
