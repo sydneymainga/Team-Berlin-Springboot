@@ -1,6 +1,5 @@
-package com.spaceyatech.berlin.services;
+package com.spaceyatech.berlin.services.accountsevice;
 
-import com.spaceyatech.berlin.interfaces.AccountInterface;
 import com.spaceyatech.berlin.models.Account;
 import com.spaceyatech.berlin.models.User;
 import com.spaceyatech.berlin.repository.AccountRepository;
@@ -95,6 +94,7 @@ public class AccountService implements AccountInterface {
                 .UpdatedAT(createdAccount.getUpdatedAT())
                 .userId(createdAccount.getUser().getId())
                 .accountId(createdAccount.getId())
+                .displayPhoto(createdAccount.getDisplay_photo())
                 .build();
         log.info("Account Created Response: {}",accountResponse);
 

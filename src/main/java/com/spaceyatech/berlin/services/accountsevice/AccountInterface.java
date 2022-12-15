@@ -1,4 +1,4 @@
-package com.spaceyatech.berlin.interfaces;
+package com.spaceyatech.berlin.services.accountsevice;
 
 import com.spaceyatech.berlin.requests.AccountRequest;
 import com.spaceyatech.berlin.response.AccountResponse;

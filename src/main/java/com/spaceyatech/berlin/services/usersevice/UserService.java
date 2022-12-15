@@ -1,4 +1,4 @@
-package com.spaceyatech.berlin.services;
+package com.spaceyatech.berlin.services.usersevice;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.interfaces.DecodedJWT;
@@ -17,17 +17,11 @@ import com.spaceyatech.berlin.response.TokenRefreshResponse;
 import com.spaceyatech.berlin.security.jwt.JwtUtils;
 import com.spaceyatech.berlin.services.emailservice.EmailDetails;
 import com.spaceyatech.berlin.services.emailservice.EmailService;
-import com.spaceyatech.berlin.services.emailservice.EmailServiceInterface;
 import com.spaceyatech.berlin.utilities.Dry;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import liquibase.pro.packaged.A;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.json.GsonBuilderUtils;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;

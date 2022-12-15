@@ -40,7 +40,7 @@ public class Dry {
 
         String salutationString;
 
-        salutationString = "Dear";
+        salutationString = "Dear ";
 
         return salutationString;
     }

@@ -3,7 +3,7 @@ package com.spaceyatech.berlin.controller;
 import com.spaceyatech.berlin.requests.AccountRequest;
 import com.spaceyatech.berlin.response.AccountResponse;
 import com.spaceyatech.berlin.response.MessageResponse;
-import com.spaceyatech.berlin.services.AccountService;
+import com.spaceyatech.berlin.services.accountsevice.AccountService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
