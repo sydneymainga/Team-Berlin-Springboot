@@ -27,8 +27,8 @@ spring:
     default-schema: public
   mail:
     host: smtp.gmail.com
-    username: davidmugi05@gmail.com
-    password: mznsidgarehcpiwt
+    username: sydneymainga6@gmail.com
+    password: htxolgckfzbsgkot
     port: '587'
     properties:
       mail:

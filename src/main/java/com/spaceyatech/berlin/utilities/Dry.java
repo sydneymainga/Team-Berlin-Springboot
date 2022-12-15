@@ -18,9 +18,35 @@ public class Dry {
         return date;
     }
 
-    /*SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
-    Date date = new Date();
-    formatter.format(date)*/
+    public static final String accountCreatedEmail() {
+
+        String accountCreatedEmailString;
+
+        accountCreatedEmailString = ",\nYour account has been created successfully";
+
+        return accountCreatedEmailString;
+    }
+
+    public static final String userRegisteredEmail() {
+
+        String userRegisteredEmailString;
+
+        userRegisteredEmailString = ",\nWelcome to SpaceYaTech,You have been registered successfully";
+
+        return userRegisteredEmailString;
+    }
+
+    public static final String salutation() {
+
+        String salutationString;
+
+        salutationString = "Dear";
+
+        return salutationString;
+    }
+
+
+
 
 
 }

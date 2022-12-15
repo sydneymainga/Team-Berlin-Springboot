@@ -171,16 +171,15 @@ public class UserService {
 
 
             try{
-              User userdetails =  userRepository.save(user);
+              User userDetails =  userRepository.save(user);
 
                 //TODO: we can send email alert
                 //building the email content
-                String emailBody= "Dear "+userdetails.getUsername()+
-                                  ",\nWelcome to SpaceYaTech,Your a user account has been created successfully";
-
+                //String emailBody= "Dear "+userDetails.getUsername()+ ",\nWelcome to SpaceYaTech,Your user account has been created successfully";
+                String emailBody= Dry.salutation() +userDetails.getUsername()+ Dry.userRegisteredEmail();
                 EmailDetails details = EmailDetails.builder()
                         .subject("Successfully Registered")
-                        .recipient(userdetails.getEmail())//email
+                        .recipient(userDetails.getEmail())//email
                         .emailBody(emailBody)
                 .build();
                 //sending email

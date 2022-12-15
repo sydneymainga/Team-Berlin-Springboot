@@ -60,8 +60,8 @@ public class AccountService implements AccountInterface {
                     createdAccount =accountRepository.save(account);
                     //TODO:send email
                     //building the email content
-                    String emailBody= "Dear "+createdAccount.getUser()+
-                            ",\nYour account has been created successfully";
+                    //String emailBody= "Dear "+createdAccount.getUser().getUsername()+ ",\nYour account has been created successfully";
+                    String emailBody= Dry.salutation() +createdAccount.getUser().getUsername()+ Dry.accountCreatedEmail();
 
                     EmailDetails details = EmailDetails.builder()
                             .subject("Account Created Successfully")
@@ -70,6 +70,8 @@ public class AccountService implements AccountInterface {
                             .build();
                     //sending email
                     emailService.sendEmail(details);
+
+                    log.info("Email to be sent:{}",details); //at this point email is not yet sent out
                 }catch (Exception e){
                     log.info("failed to save account :{}",e.getMessage());
                     throw new RuntimeException("failed to save user account : "+e.toString());

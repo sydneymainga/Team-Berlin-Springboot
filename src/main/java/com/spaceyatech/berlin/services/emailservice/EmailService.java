@@ -38,7 +38,9 @@ public class EmailService implements EmailServiceInterface{
 
             return true;
         }catch (Exception ex){
+            log.error("email not sent:{}",ex.getMessage());
                 return false;
+
         }
     }
 }
