@@ -36,6 +36,16 @@ spring:
           starttls:
             enable: 'true'
           auth: 'true'
+management:
+    endpoint:
+      metrics:
+        enabled: true
+      prometheus:
+        enabled: true
+    endpoints:
+      web:
+        exposure:
+          include: prometheus
 jwt-properties:
             app:
              jwtSecret: berlinSecretKey

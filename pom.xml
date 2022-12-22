@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.spaceyatech</groupId>
 	<artifactId>berlinspringboot</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>berlinspringboot</name>
 	<description>this is a springboot project for team berlin space ya tech</description>
 	<properties>
@@ -94,6 +94,18 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+
+		<!--logging-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>io.micrometer</groupId>
+			<artifactId>micrometer-registry-prometheus</artifactId>
+			<version>1.10.2</version>
 		</dependency>
 
 
