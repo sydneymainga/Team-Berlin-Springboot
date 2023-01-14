@@ -1,7 +1,8 @@
 #https://www.geeksforgeeks.org/how-to-dockerize-a-spring-boot-application-with-maven/
 # Fetching latest version of Java
 
-FROM openjdk:17-jdk-alpine
+FROM openjdk:17
+#-jdk-alpine
 
 #Define where your jar file resides.
 ARG JAR_FILE=target/*.jar

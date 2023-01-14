@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+  app:
+    container_name: springboot-postgresql-berlin
+    #image: springboot-postgresql
+    build: ./
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgresqldb
+  postgresqldb:
+    platform: linux/x86_64
+    image: postgres
+    restart: always
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_PASSWORD=berlin
+      - POSTGRES_USER=berlin
+      - POSTGRES_DB=berlin
+      - POSTGRES_ROOT_PASSWORD=berlin
+
