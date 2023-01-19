@@ -118,12 +118,15 @@ public class UserService {
             String date = Dry.getCurrentDate();
 
             log.info("getcurrentdate:-->{}",date);
+            String otp =Dry.generateOtp();
+            log.info("Generated OTP is :{}",otp);
 
             User user = User.builder()
                     .username(signUpRequest.getUsername())
                     .email(signUpRequest.getEmail())
                     .password(encoder.encode(signUpRequest.getPassword()))
                     .date_created(Timestamp.valueOf(date))//change to proper date
+                    .verification_code(otp)
                     .build();
 
 
@@ -167,7 +170,9 @@ public class UserService {
             try{
               User userDetails =  userRepository.save(user);
 
-                //TODO: we can send email alert
+                //TODO: we can send email alert also generate OTP in future
+
+
                 //building the email content
                 //String emailBody= "Dear "+userDetails.getUsername()+ ",\nWelcome to SpaceYaTech,Your user account has been created successfully";
                 String emailBody= Dry.salutation() +userDetails.getUsername()+ Dry.userRegisteredEmail();

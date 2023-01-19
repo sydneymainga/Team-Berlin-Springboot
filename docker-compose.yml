@@ -19,4 +19,6 @@ services:
       - POSTGRES_USER=berlin
       - POSTGRES_DB=berlin
       - POSTGRES_ROOT_PASSWORD=berlin
-
+networks:
+  postgres:
+    driver: bridge
