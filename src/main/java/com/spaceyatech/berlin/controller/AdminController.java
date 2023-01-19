@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/admin")
+@RequestMapping("/api/v1/admin")
 @Tag(name="Admin Controller")
 @AllArgsConstructor
 @NoArgsConstructor

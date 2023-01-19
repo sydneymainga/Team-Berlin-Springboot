@@ -1,24 +1,25 @@
-version: '3.8'
+version: '3'
 services:
-  app:
-    container_name: springboot-postgresql-berlin
-    #image: springboot-postgresql
-    build: ./
+  application:
+    container_name: team_berlin_springboot
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
       - "8080:8080"
+    expose:
+      - "8080"
     depends_on:
-      - postgresqldb
-  postgresqldb:
-    platform: linux/x86_64
-    image: postgres
-    restart: always
-    ports:
-      - "5433:5432"
+      - database
+
+  database:
+    image: 'postgres:alpine'
+    container_name: team_berlin_postgres_db
+    restart: unless-stopped
     environment:
-      - POSTGRES_PASSWORD=berlin
-      - POSTGRES_USER=berlin
-      - POSTGRES_DB=berlin
-      - POSTGRES_ROOT_PASSWORD=berlin
-networks:
-  postgres:
-    driver: bridge
+      POSTGRES_USER: "berlin"
+      POSTGRES_PASSWORD: "berlin"
+      POSTGRES_DB: "berlin"
+    ports:
+      - "5423:5432"

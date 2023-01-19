@@ -18,7 +18,7 @@ import javax.validation.Valid;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/Account")
+@RequestMapping("/api/v1/Account")
 @Tag(name="Account Controller")
 @AllArgsConstructor
 @NoArgsConstructor
