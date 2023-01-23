@@ -23,4 +23,4 @@ http://{YOUR DOMAIN eg. localhost:8080}/swagger-ui/index.html
 
 mvn clean install -DskipTests=true / mvn package spring-boot:repackage -DskipTests=true
 
-run 'docker compose up'
+run 'docker compose up --build'
