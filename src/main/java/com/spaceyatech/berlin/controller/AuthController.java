@@ -23,7 +23,7 @@ import javax.validation.Valid;
 
 
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/api/v1/auth")
 @Tag(name="Auth Controller")
 @AllArgsConstructor
 @NoArgsConstructor
