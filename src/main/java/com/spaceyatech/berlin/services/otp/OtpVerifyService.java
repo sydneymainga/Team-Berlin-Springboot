@@ -28,7 +28,7 @@ public class OtpVerifyService {
         User presavedOtp;
 
 
-        Optional<User> otpOptional = Optional.of(otpRepository.findById(userID).get());
+        Optional<User> otpOptional = otpRepository.findById(userID);
 
         if(otpOptional.isPresent()) {
 
@@ -59,11 +59,13 @@ public class OtpVerifyService {
 
 
         } else {
-            // OTP code not found in database, return error response
-            otpVerifyResponse= OtpVerifyResponse.builder()
-                    .message("OTP/USERID provided code not found")
-                    .build();
-            log.error("OTP/USERID provided code not found");
+            // USER ID not found in database, return error response
+                otpVerifyResponse= OtpVerifyResponse.builder()
+                        .message("user with id : "+otpVerifyRequest.getUserId()+ " not present")
+                        .build();
+
+            log.error("user with id: {}  not present",otpVerifyRequest.getUserId());
+            //throw new RuntimeException("user with id : "+otpVerifyRequest.getUserId()+ " not present");
         }
 
             log.info("otp verification response {} ",otpVerifyResponse);
