@@ -144,7 +144,7 @@
 				<artifactId>liquibase-maven-plugin</artifactId>
 				<version>4.7.1</version>
 				<configuration>
-					<propertyFile>target/classes/application.yml</propertyFile>
+					<propertyFile>src/main/resources/application.yml</propertyFile>
 					<outputChangeLogFile>src/main/resources/db.changelog/db.changelog-master.xml</outputChangeLogFile>
 					<changeLogFile>src/main/resources/db.changelog/db.changelog-master.xml</changeLogFile>
 				</configuration>

@@ -8,8 +8,7 @@
 
 
 
-
-    <changeSet author="user (generated)" id="1668332399512-1">
+    <changeSet author="user (generated)" id="1676377843170-1">
         <createTable tableName="account">
             <column name="id" type="UUID">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="account_pkey"/>
@@ -24,7 +23,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="user (generated)" id="1668332399512-2">
+    <changeSet author="user (generated)" id="1676377843170-2">
         <createTable tableName="blog_category">
             <column name="id" type="UUID">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="blog_category_pkey"/>
@@ -34,7 +33,7 @@
             <column name="category_name" type="VARCHAR(45)"/>
         </createTable>
     </changeSet>
-    <changeSet author="user (generated)" id="1668332399512-3">
+    <changeSet author="user (generated)" id="1676377843170-3">
         <createTable tableName="blog_category_has_blog_post">
             <column name="blog_categories_id" type="UUID">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="blog_category_has_blog_post_pkey"/>
@@ -44,7 +43,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="user (generated)" id="1668332399512-4">
+    <changeSet author="user (generated)" id="1676377843170-4">
         <createTable tableName="blog_post">
             <column name="id" type="UUID">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="blog_post_pkey"/>
@@ -59,7 +58,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="user (generated)" id="1668332399512-5">
+    <changeSet author="user (generated)" id="1676377843170-5">
         <createTable tableName="blog_post_image">
             <column name="id" type="UUID">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="blog_post_image_pkey"/>
@@ -68,7 +67,7 @@
             <column name="blog_post_imagescol" type="VARCHAR(45)"/>
         </createTable>
     </changeSet>
-    <changeSet author="user (generated)" id="1668332399512-6">
+    <changeSet author="user (generated)" id="1676377843170-6">
         <createTable tableName="blog_post_image_has_blog_post">
             <column name="blog_post_images_blog_image_url" type="UUID">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="blog_post_image_has_blog_post_pkey"/>
@@ -78,7 +77,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="user (generated)" id="1668332399512-7">
+    <changeSet author="user (generated)" id="1676377843170-7">
         <createTable tableName="comment">
             <column name="id" type="UUID">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="comment_pkey"/>
@@ -94,7 +93,7 @@
             <column name="comment_id" type="UUID"/>
         </createTable>
     </changeSet>
-    <changeSet author="user (generated)" id="1668332399512-8">
+    <changeSet author="user (generated)" id="1676377843170-8">
         <createTable tableName="reaction">
             <column name="id" type="UUID">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="reaction_pkey"/>
@@ -112,7 +111,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="user (generated)" id="1668332399512-9">
+    <changeSet author="user (generated)" id="1676377843170-9">
         <createTable tableName="role">
             <column name="id" type="UUID">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="role_pkey"/>
@@ -121,7 +120,7 @@
             <column name="role_col" type="VARCHAR(45)"/>
         </createTable>
     </changeSet>
-    <changeSet author="user (generated)" id="1668332399512-10">
+    <changeSet author="user (generated)" id="1676377843170-10">
         <createTable tableName="users">
             <column name="id" type="UUID">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="users_pkey"/>
@@ -133,9 +132,10 @@
             <column name="user_name" type="VARCHAR(50)"/>
             <column name="users_col" type="VARCHAR(45)"/>
             <column name="verification_code" type="VARCHAR(45)"/>
+            <column name="verified_code" type="BOOLEAN"/>
         </createTable>
     </changeSet>
-    <changeSet author="user (generated)" id="1668332399512-11">
+    <changeSet author="user (generated)" id="1676377843170-11">
         <createTable tableName="users_has_role">
             <column name="user_id" type="UUID">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="users_has_role_pkey"/>
@@ -145,46 +145,46 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="user (generated)" id="1668332399512-12">
+    <changeSet author="user (generated)" id="1676377843170-12">
         <addForeignKeyConstraint baseColumnNames="blogpost_id" baseTableName="comment" constraintName="fk2r8t6y8o481xlqkn0id822rkv" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="blog_post" />
     </changeSet>
-    <changeSet author="user (generated)" id="1668332399512-13">
+    <changeSet author="user (generated)" id="1676377843170-13">
         <addForeignKeyConstraint baseColumnNames="blog_post_id" baseTableName="reaction" constraintName="fk2x21c54og7mlq3wmnnxe5gou8" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="blog_post" />
     </changeSet>
-    <changeSet author="user (generated)" id="1668332399512-14">
+    <changeSet author="user (generated)" id="1676377843170-14">
         <addForeignKeyConstraint baseColumnNames="role_id" baseTableName="users_has_role" constraintName="fk4awrxb7h4whgo7qfodfn3wxvx" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="role" />
     </changeSet>
-    <changeSet author="user (generated)" id="1668332399512-15">
+    <changeSet author="user (generated)" id="1676377843170-15">
         <addForeignKeyConstraint baseColumnNames="account_id" baseTableName="reaction" constraintName="fk4n7bkx3ku9etqawcqp4vstedv" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="account" />
     </changeSet>
-    <changeSet author="user (generated)" id="1668332399512-16">
+    <changeSet author="user (generated)" id="1676377843170-16">
         <addForeignKeyConstraint baseColumnNames="blog_categories_id" baseTableName="blog_category_has_blog_post" constraintName="fk7njgtxj549f4agi27q6260fu5" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="blog_post" />
     </changeSet>
-    <changeSet author="user (generated)" id="1668332399512-17">
+    <changeSet author="user (generated)" id="1676377843170-17">
         <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="users_has_role" constraintName="fk7tol2j2en4ry01x30bqrlgh0r" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="users" />
     </changeSet>
-    <changeSet author="user (generated)" id="1668332399512-18">
+    <changeSet author="user (generated)" id="1676377843170-18">
         <addForeignKeyConstraint baseColumnNames="blogposts_id" baseTableName="blog_category_has_blog_post" constraintName="fkdhtcckjcxx9clmf5eh7hypo68" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="blog_category" />
     </changeSet>
-    <changeSet author="user (generated)" id="1668332399512-19">
+    <changeSet author="user (generated)" id="1676377843170-19">
         <addForeignKeyConstraint baseColumnNames="users_id" baseTableName="account" constraintName="fkjhlf5avsj15dfty4q7loqt7i4" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="users" />
     </changeSet>
-    <changeSet author="user (generated)" id="1668332399512-20">
-        <addForeignKeyConstraint baseColumnNames="blog_post_images_blog_image_url" baseTableName="blog_post_image_has_blog_post" constraintName="fkjylo1re8upnf9ff7v498y6j16" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="blog_post"/>
+    <changeSet author="user (generated)" id="1676377843170-20">
+        <addForeignKeyConstraint baseColumnNames="blog_post_images_blog_image_url" baseTableName="blog_post_image_has_blog_post" constraintName="fkjylo1re8upnf9ff7v498y6j16" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="blog_post" />
     </changeSet>
-    <changeSet author="user (generated)" id="1668332399512-21">
+    <changeSet author="user (generated)" id="1676377843170-21">
         <addForeignKeyConstraint baseColumnNames="comment_id" baseTableName="comment" constraintName="fkmk3c8pbvysjndxywunibl2voc" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="comment" />
     </changeSet>
-    <changeSet author="user (generated)" id="1668332399512-22">
+    <changeSet author="user (generated)" id="1676377843170-22">
         <addForeignKeyConstraint baseColumnNames="accounts_id" baseTableName="blog_post" constraintName="fkms96nr5k13kn4dkl483rk3u4n" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="account" />
     </changeSet>
-    <changeSet author="user (generated)" id="1668332399512-23">
+    <changeSet author="user (generated)" id="1676377843170-23">
         <addForeignKeyConstraint baseColumnNames="account_id" baseTableName="comment" constraintName="fkp41h5al2ajp1q0u6ox3i68w61" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="account" />
     </changeSet>
-    <changeSet author="user (generated)" id="1668332399512-24">
+    <changeSet author="user (generated)" id="1676377843170-24">
         <addForeignKeyConstraint baseColumnNames="blogposts_id" baseTableName="blog_post_image_has_blog_post" constraintName="fkr7lj4j35r32pxi3cw9siq4mc0" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="blog_post_image" />
     </changeSet>
-    <changeSet author="user (generated)" id="1668332399512-25">
+    <changeSet author="user (generated)" id="1676377843170-25">
         <addForeignKeyConstraint baseColumnNames="comment_id" baseTableName="reaction" constraintName="fkskbqddo2ffvogxr3f22awp2wa" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="comment" />
     </changeSet>
 </databaseChangeLog>

@@ -19,8 +19,15 @@ For db changelog tracking and versioning
 
 http://{YOUR DOMAIN eg. localhost:8080}/swagger-ui/index.html
 
+# swagger documentation for app on heroku
+
+https://springbootberlin.herokuapp.com/swagger-ui/index.html
+
 # Start application in docker
 
 mvn clean install -DskipTests=true / mvn package spring-boot:repackage -DskipTests=true
 
 run 'docker compose up --build'
+
+# Generate a ChangeLog From an Existing Database
+mvn liquibase:generateChangeLog

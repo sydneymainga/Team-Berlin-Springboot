@@ -29,6 +29,9 @@ public class User extends BaseEntity{
     private String userscol;
     @Column(name="verification_code",length=45)
     private String verification_code;
+
+    @Column(name="verified_code",length=45)
+    private Boolean verified_code;
     @Column(name="date_created",length=6)
     private Timestamp date_created;
 
