@@ -21,6 +21,9 @@ public class OtpVerifyService {
 
         UUID userID = otpVerifyRequest.getUserId();
        String otpCode = otpVerifyRequest.getOtp();
+
+       log.info("userID {} and otp {}",userID,otpCode);
+
         OtpVerifyResponse otpVerifyResponse;
         User presavedOtp;
 
@@ -39,15 +42,19 @@ public class OtpVerifyService {
                     otpVerifyResponse= OtpVerifyResponse.builder()
                             .message("OTP verification successful")
                             .build();
+                    log.info("OTP verification successful");
+
                 }else{
                     otpVerifyResponse= OtpVerifyResponse.builder()
                             .message("Invalid OTP code")
                             .build();
+                    log.error("Invalid OTP code");
                 }
             }else{
                 otpVerifyResponse= OtpVerifyResponse.builder()
                         .message("user already verified")
                         .build();
+                log.error("user already verified");
             }
 
 
@@ -56,10 +63,13 @@ public class OtpVerifyService {
             otpVerifyResponse= OtpVerifyResponse.builder()
                     .message("OTP/USERID provided code not found")
                     .build();
+            log.error("OTP/USERID provided code not found");
         }
 
-
+            log.info("otp verification response {} ",otpVerifyResponse);
         return otpVerifyResponse;
+
+
 
 
     }
