@@ -20,9 +20,9 @@ public class OtpVerifyService {
     public OtpVerifyResponse verifyOtp(OtpVerifyRequest otpVerifyRequest) {
 
         UUID userID = otpVerifyRequest.getUserId();
-       String otpCode = otpVerifyRequest.getOtp();
+       String otpCode = otpVerifyRequest.getOtp().trim();
 
-       log.info("userID {} and otp {}",userID,otpCode);
+       log.info("userID : {} and otp : {} passed are ",userID,otpCode);
 
         OtpVerifyResponse otpVerifyResponse;
         User presavedOtp;
@@ -32,7 +32,7 @@ public class OtpVerifyService {
 
         if(otpOptional.isPresent()) {
 
-            if(!otpOptional.get().getVerified_code()){   // if user otp is not verified ...
+            if(!otpOptional.get().getVerified_code() ){   // if user otp is not verified ...
                 presavedOtp = otpOptional.get();
 
                 if (presavedOtp.getVerification_code().equals(otpCode)) {

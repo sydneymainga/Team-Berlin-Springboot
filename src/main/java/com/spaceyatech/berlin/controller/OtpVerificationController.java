@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 
 @RestController
 @RequestMapping("/api/v1/Otp")
@@ -37,7 +38,7 @@ public class OtpVerificationController {
 
     @PostMapping("/otpVerify")
     @SecurityRequirement(name = "Bearer Authentication")
-    public ResponseEntity<OtpVerifyResponse> verifyOtp(@RequestBody @Valid OtpVerifyRequest otpVerifyRequest){
+    public ResponseEntity<OtpVerifyResponse> verifyOtp(@NotBlank @RequestBody @Valid OtpVerifyRequest otpVerifyRequest){
 
 
         OtpVerifyResponse otpVerifyResponse = otpVerifyService.verifyOtp(otpVerifyRequest);
