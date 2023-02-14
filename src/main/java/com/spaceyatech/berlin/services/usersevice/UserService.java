@@ -127,6 +127,7 @@ public class UserService {
                     .password(encoder.encode(signUpRequest.getPassword()))
                     .date_created(Timestamp.valueOf(date))//change to proper date
                     .verification_code(otp)
+                    .verified_code(false)
                     .build();
 
 
