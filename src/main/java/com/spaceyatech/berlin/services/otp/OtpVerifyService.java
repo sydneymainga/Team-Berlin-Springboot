@@ -52,9 +52,9 @@ public class OtpVerifyService {
                 }
             }else{
                 otpVerifyResponse= OtpVerifyResponse.builder()
-                        .message("user already verified")
+                        .message("user already verified /otp expired")
                         .build();
-                log.error("user already verified");
+                log.error("user already verified / otp expired");
             }
 
 

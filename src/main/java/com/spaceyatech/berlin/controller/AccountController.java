@@ -24,6 +24,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Slf4j
 public class AccountController {
+
     @Autowired
     private AccountService accountService;
 
