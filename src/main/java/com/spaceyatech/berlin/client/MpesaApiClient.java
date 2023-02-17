@@ -2,6 +2,7 @@ package com.spaceyatech.berlin.client;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.spaceyatech.berlin.requests.MpesaC2bRequest;
 import com.spaceyatech.berlin.requests.MpesaTransactionStatusRequestBody;
 import com.spaceyatech.berlin.response.MpesaTransactionStatusResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -84,6 +85,31 @@ public class MpesaApiClient {
         log.info("response from safaricom {} : ",responseBody);
 
         return objectMapper.readValue(responseBody, MpesaTransactionStatusResponse.class);
+    }
+    //mpesa c2b
+    public MpesaTransactionStatusResponse getC2bTransaction(MpesaC2bRequest requestBody) throws IOException {
+        RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), objectMapper.writeValueAsString(requestBody));
+        log.info("MPESA_AUTH_TOKEN :{}",authenticate());
+        log.info("request body:{}",requestBody);
+
+
+        Request request = new Request.Builder()
+                .url(MPESA_BASE_URL + "mpesa/c2b/v1/simulate")
+                .addHeader("Authorization", "Bearer " + authenticate())
+                .post(body)
+                .build();
+
+
+
+        String responseBody;
+        try (Response response = httpClient.newCall(request).execute()) {
+            assert response.body() != null;
+            responseBody = response.body().string();
+        }
+
+
+        return objectMapper.readValue(responseBody, MpesaTransactionStatusResponse.class);
+
     }
 }
 

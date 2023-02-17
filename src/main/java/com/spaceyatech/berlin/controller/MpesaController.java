@@ -1,5 +1,6 @@
 package com.spaceyatech.berlin.controller;
 
+import com.spaceyatech.berlin.requests.MpesaC2bRequest;
 import com.spaceyatech.berlin.requests.MpesaTransactionStatusRequestBody;
 import com.spaceyatech.berlin.services.mpesaservice.MpesaService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -14,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.io.IOException;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1/Mpesa")
@@ -28,16 +28,9 @@ public class MpesaController {
     private MpesaService mpesaService;
 
 
-    @PostMapping("/mpesaAuthApi")
-    @SecurityRequirement(name = "Bearer Authentication")
-    public ResponseEntity<?> authorisationApi( ){
 
 
-        return ResponseEntity.status(HttpStatus.CREATED).body("");
-    }
-
-   /*** MPesa Express
-    Merchant initiated online payments*/
+   /*** MPesa Express Merchant initiated online payments*/
     @PostMapping("/mpesaExpressApi")
     @SecurityRequirement(name = "Bearer Authentication")
     public ResponseEntity<?> mpesaExpressApi( ){
@@ -48,10 +41,11 @@ public class MpesaController {
 
     @PostMapping("/c2b")
     @SecurityRequirement(name = "Bearer Authentication")
-    public ResponseEntity<?> customerToBusiness( ){
+    public ResponseEntity<?> customerToBusiness(@RequestBody @Valid MpesaC2bRequest mpesaC2bRequest ) throws IOException{
 
+        log.info("c2b requestBody{}",mpesaC2bRequest);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body("");
+        return ResponseEntity.status(HttpStatus.OK).body(mpesaService.customerToBusiness(mpesaC2bRequest));
     }
 
     @PostMapping("/b2c")
