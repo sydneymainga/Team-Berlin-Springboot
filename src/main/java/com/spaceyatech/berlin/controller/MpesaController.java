@@ -1,6 +1,7 @@
 package com.spaceyatech.berlin.controller;
 
 import com.spaceyatech.berlin.requests.MpesaC2bRequest;
+import com.spaceyatech.berlin.requests.MpesaExpressRequest;
 import com.spaceyatech.berlin.requests.MpesaTransactionStatusRequestBody;
 import com.spaceyatech.berlin.services.mpesaservice.MpesaService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -30,13 +31,14 @@ public class MpesaController {
 
 
 
-   /*** MPesa Express Merchant initiated online payments*/
+   /*** MPesa Express Merchant initiated online payments AKA lipa na mpesa STK push*/
     @PostMapping("/mpesaExpressApi")
     @SecurityRequirement(name = "Bearer Authentication")
-    public ResponseEntity<?> mpesaExpressApi( ){
+    public ResponseEntity<?> mpesaExpressApi(@RequestBody @Valid MpesaExpressRequest mpesaExpressRequest) throws IOException{
 
+        log.info("mpesaExpress requestBody{}",mpesaExpressRequest);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body("");
+        return ResponseEntity.status(HttpStatus.OK).body(mpesaService.mpesaExpressStkPush(mpesaExpressRequest));
     }
 
     @PostMapping("/c2b")

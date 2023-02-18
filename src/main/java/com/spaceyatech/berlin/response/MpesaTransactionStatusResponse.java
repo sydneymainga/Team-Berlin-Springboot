@@ -16,11 +16,22 @@ public class MpesaTransactionStatusResponse {
     private String responseCode;
     private String responseDescription;
     private String transactionStatus;
+    private String merchantRequestID;
+    private String checkoutRequestID;
+    private String customerMessage;
 
     //for when it falls into an error
     private String requestId;
     private String errorCode;
     private String errorMessage;
+
+    /*{
+        "MerchantRequestID": "47147-14101590-1",
+            "CheckoutRequestID": "ws_CO_18022023104311101708374149",
+            "ResponseCode": "0",
+            "ResponseDescription": "Success. Request accepted for processing",
+            "CustomerMessage": "Success. Request accepted for processing"
+    }*/
 
 
     /*{

@@ -3,6 +3,7 @@ package com.spaceyatech.berlin.services.mpesaservice;
 
 import com.spaceyatech.berlin.client.MpesaApiClient;
 import com.spaceyatech.berlin.requests.MpesaC2bRequest;
+import com.spaceyatech.berlin.requests.MpesaExpressRequest;
 import com.spaceyatech.berlin.requests.MpesaTransactionStatusRequestBody;
 import com.spaceyatech.berlin.response.MpesaTransactionStatusResponse;
 import liquibase.pro.packaged.M;
@@ -139,6 +140,67 @@ public class MpesaService {
         }
 
 
+    }
+
+    public MpesaTransactionStatusResponse mpesaExpressStkPush(MpesaExpressRequest mpesaExpressRequest) throws IOException{
+
+            MpesaExpressRequest request = MpesaExpressRequest.builder()
+
+                    .businessShortCode(mpesaExpressRequest.getBusinessShortCode())
+                    .password(mpesaExpressRequest.getPassword())
+                    .timestamp(mpesaExpressRequest.getTimestamp())
+                    .transactionType(mpesaExpressRequest.getTransactionType())
+                    .amount(mpesaExpressRequest.getAmount())
+                    .partyA(mpesaExpressRequest.getPartyA())
+                    .partyB(mpesaExpressRequest.getPartyB())
+                    .phoneNumber(mpesaExpressRequest.getPhoneNumber())
+                    .callBackURL(mpesaExpressRequest.getCallBackURL())
+                    .accountReference(mpesaExpressRequest.getAccountReference()) //figure out how to generate it dynamically and store it in db
+                    .transactionDesc(mpesaExpressRequest.getTransactionDesc())
+
+                    .build();
+
+            log.info("mpesaExpressStkPush requestBody in mpesa-service : {}",request);
+        MpesaTransactionStatusResponse response = null;
+        try {
+            response = mpesaApiClient.sendmpesaExpressStkPush(request);
+
+            log.info("response from safaricom c2b {} : ",response);
+
+            if(response.getResponseCode().equals("0")){
+                //save something to db
+                log.info("response c2b : {}",response);
+                return response;
+            }else {
+                //save description and code to db
+
+
+
+                MpesaTransactionStatusResponse  responsewhennotzero = MpesaTransactionStatusResponse.builder()
+                        .responseCode(response.getResponseCode())
+                        .transactionStatus(response.getResponseDescription())
+                        .build();
+
+                log.info("response c2b : {}",responsewhennotzero);
+
+                return responsewhennotzero;
+            }
+
+        }catch (Exception e){
+            log.error("we were unable to c2b trans because of : {}",e.getMessage());
+
+            assert response != null;
+            MpesaTransactionStatusResponse  responsewhenexception = MpesaTransactionStatusResponse.builder()
+
+                    .errorCode(response.getErrorCode())
+                    .requestId(response.getRequestId())
+                    .errorMessage(response.getErrorMessage())
+                    .build();
+
+            return responsewhenexception;
+
+            // throw new RuntimeException("we were unable to retrieve transaction status : "+e.getMessage());
+        }
     }
 }
 
