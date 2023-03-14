@@ -5,8 +5,7 @@ import com.spaceyatech.berlin.client.MpesaApiClient;
 import com.spaceyatech.berlin.requests.MpesaC2bRequest;
 import com.spaceyatech.berlin.requests.MpesaExpressRequest;
 import com.spaceyatech.berlin.requests.MpesaTransactionStatusRequestBody;
-import com.spaceyatech.berlin.response.MpesaTransactionStatusResponse;
-import liquibase.pro.packaged.M;
+import com.spaceyatech.berlin.response.MpesaResponse;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,7 +22,7 @@ public class MpesaService {
         @Autowired
         private MpesaApiClient mpesaApiClient;
 
-        public MpesaTransactionStatusResponse getTransactionStatus(MpesaTransactionStatusRequestBody request,String transactionId) throws IOException {
+        public MpesaResponse getTransactionStatus(MpesaTransactionStatusRequestBody request, String transactionId) throws IOException {
 
                MpesaTransactionStatusRequestBody requestBody = MpesaTransactionStatusRequestBody.builder()
                        .transactionId(transactionId)
@@ -40,7 +39,7 @@ public class MpesaService {
                log.info("MpesaTransactionStatusRequestBody :{}",requestBody);
 
 
-                MpesaTransactionStatusResponse response = null;
+                MpesaResponse response = null;
                try {
                     response = mpesaApiClient.getTransactionStatus(requestBody);
 
@@ -55,7 +54,7 @@ public class MpesaService {
 
 
 
-                        MpesaTransactionStatusResponse  responsewhennotzero = MpesaTransactionStatusResponse.builder()
+                        MpesaResponse responsewhennotzero = MpesaResponse.builder()
                                 .responseCode(response.getResponseCode())
                                 .transactionStatus(response.getResponseDescription())
                                 .build();
@@ -69,7 +68,7 @@ public class MpesaService {
                    log.error("we were unable to retrieve transaction status because of : {}",e.getMessage());
 
                    assert response != null;
-                   MpesaTransactionStatusResponse  responsewhenexception = MpesaTransactionStatusResponse.builder()
+                   MpesaResponse responsewhenexception = MpesaResponse.builder()
 
                            .errorCode(response.getErrorCode())
                            .requestId(response.getRequestId())
@@ -87,7 +86,7 @@ public class MpesaService {
 
         }
 
-    public MpesaTransactionStatusResponse customerToBusiness(MpesaC2bRequest mpesaC2bRequest)throws IOException {
+    public MpesaResponse customerToBusiness(MpesaC2bRequest mpesaC2bRequest)throws IOException {
 
             MpesaC2bRequest request = MpesaC2bRequest.builder()
                     .billRefNumber(mpesaC2bRequest.getBillRefNumber())
@@ -98,7 +97,7 @@ public class MpesaService {
                .build();
         log.info("c2b requestBody in mpesa-service : {}",mpesaC2bRequest);
 
-        MpesaTransactionStatusResponse response = null;
+        MpesaResponse response = null;
         try {
             response = mpesaApiClient.getC2bTransaction(request);
 
@@ -113,7 +112,7 @@ public class MpesaService {
 
 
 
-                MpesaTransactionStatusResponse  responsewhennotzero = MpesaTransactionStatusResponse.builder()
+                MpesaResponse responsewhennotzero = MpesaResponse.builder()
                         .responseCode(response.getResponseCode())
                         .transactionStatus(response.getResponseDescription())
                         .build();
@@ -127,7 +126,7 @@ public class MpesaService {
             log.error("we were unable to c2b trans because of : {}",e.getMessage());
 
             assert response != null;
-            MpesaTransactionStatusResponse  responsewhenexception = MpesaTransactionStatusResponse.builder()
+            MpesaResponse responsewhenexception = MpesaResponse.builder()
 
                     .errorCode(response.getErrorCode())
                     .requestId(response.getRequestId())
@@ -142,7 +141,7 @@ public class MpesaService {
 
     }
 
-    public MpesaTransactionStatusResponse mpesaExpressStkPush(MpesaExpressRequest mpesaExpressRequest) throws IOException{
+    public MpesaResponse mpesaExpressStkPush(MpesaExpressRequest mpesaExpressRequest) throws IOException{
 
             MpesaExpressRequest request = MpesaExpressRequest.builder()
 
@@ -161,7 +160,7 @@ public class MpesaService {
                     .build();
 
             log.info("mpesaExpressStkPush requestBody in mpesa-service : {}",request);
-        MpesaTransactionStatusResponse response = null;
+        MpesaResponse response = null;
         try {
             response = mpesaApiClient.sendmpesaExpressStkPush(request);
 
@@ -176,7 +175,7 @@ public class MpesaService {
 
 
 
-                MpesaTransactionStatusResponse  responsewhennotzero = MpesaTransactionStatusResponse.builder()
+                MpesaResponse responsewhennotzero = MpesaResponse.builder()
                         .responseCode(response.getResponseCode())
                         .transactionStatus(response.getResponseDescription())
                         .build();
@@ -190,7 +189,7 @@ public class MpesaService {
             log.error("we were unable to c2b trans because of : {}",e.getMessage());
 
             assert response != null;
-            MpesaTransactionStatusResponse  responsewhenexception = MpesaTransactionStatusResponse.builder()
+            MpesaResponse responsewhenexception = MpesaResponse.builder()
 
                     .errorCode(response.getErrorCode())
                     .requestId(response.getRequestId())

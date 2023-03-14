@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.spaceyatech.berlin.requests.MpesaC2bRequest;
 import com.spaceyatech.berlin.requests.MpesaExpressRequest;
 import com.spaceyatech.berlin.requests.MpesaTransactionStatusRequestBody;
-import com.spaceyatech.berlin.response.MpesaTransactionStatusResponse;
+import com.spaceyatech.berlin.response.MpesaResponse;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -63,7 +63,7 @@ public class MpesaApiClient {
 
 
     //MpesaTransactionStatus
-    public MpesaTransactionStatusResponse getTransactionStatus(MpesaTransactionStatusRequestBody requestBody) throws IOException {
+    public MpesaResponse getTransactionStatus(MpesaTransactionStatusRequestBody requestBody) throws IOException {
 
         RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), objectMapper.writeValueAsString(requestBody));
         log.info("MPESA_AUTH_TOKEN :{}",authenticate());
@@ -85,10 +85,10 @@ public class MpesaApiClient {
         }
         log.info("response from safaricom {} : ",responseBody);
 
-        return objectMapper.readValue(responseBody, MpesaTransactionStatusResponse.class);
+        return objectMapper.readValue(responseBody, MpesaResponse.class);
     }
     //mpesa c2b
-    public MpesaTransactionStatusResponse getC2bTransaction(MpesaC2bRequest requestBody) throws IOException {
+    public MpesaResponse getC2bTransaction(MpesaC2bRequest requestBody) throws IOException {
         RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), objectMapper.writeValueAsString(requestBody));
         log.info("MPESA_AUTH_TOKEN :{}",authenticate());
         log.info("request body:{}",requestBody);
@@ -109,11 +109,11 @@ public class MpesaApiClient {
         }
 
 
-        return objectMapper.readValue(responseBody, MpesaTransactionStatusResponse.class);
+        return objectMapper.readValue(responseBody, MpesaResponse.class);
 
     }
     //STKPUsh
-    public MpesaTransactionStatusResponse sendmpesaExpressStkPush(MpesaExpressRequest requestBody) throws IOException {
+    public MpesaResponse sendmpesaExpressStkPush(MpesaExpressRequest requestBody) throws IOException {
         RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), objectMapper.writeValueAsString(requestBody));
         log.info("MPESA_AUTH_TOKEN :{}",authenticate());
         log.info("request body:{}",requestBody);
@@ -134,7 +134,7 @@ public class MpesaApiClient {
         }
 
 
-        return objectMapper.readValue(responseBody, MpesaTransactionStatusResponse.class);
+        return objectMapper.readValue(responseBody, MpesaResponse.class);
 
     }
 }

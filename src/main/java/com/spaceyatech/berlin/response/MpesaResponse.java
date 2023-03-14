@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class MpesaTransactionStatusResponse {
+public class MpesaResponse {
 
     private String conversationId;
     private String originatorConversationId;
