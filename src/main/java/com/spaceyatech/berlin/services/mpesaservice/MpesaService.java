@@ -123,15 +123,17 @@ public class MpesaService {
             }
 
         }catch (Exception e){
-            log.error("we were unable to c2b trans because of : {}",e.getMessage());
+            //log.error("we were unable to c2b trans because of : {}",e.getMessage());
 
-            assert response != null;
+            String error = "unable to sent c2b request because of : {}"+e.getMessage();
+            log.error(error);
+
             MpesaResponse responsewhenexception = MpesaResponse.builder()
 
-                    .errorCode(response.getErrorCode())
-                    .requestId(response.getRequestId())
-                    .errorMessage(response.getErrorMessage())
+                    .errorMessage(error)
+
                     .build();
+
 
             return responsewhenexception;
 
