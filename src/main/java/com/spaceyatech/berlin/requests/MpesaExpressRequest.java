@@ -11,13 +11,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class MpesaExpressRequest {
 
-    private int businessShortCode;
+    private String businessShortCode;
     private String password;
     private String timestamp;
     private String transactionType;
     private String amount;
     private String partyA;
-    private int partyB;
+    private String partyB;
     private String phoneNumber;
     private String callBackURL;
     private String accountReference;

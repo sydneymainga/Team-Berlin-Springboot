@@ -9,10 +9,12 @@ import com.spaceyatech.berlin.response.MpesaResponse;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
 import okhttp3.logging.HttpLoggingInterceptor;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 @Slf4j
 @Component
@@ -34,12 +36,12 @@ public class MpesaApiClient {
     //mpesa authentication
     public String authenticate() throws IOException {
 
+
         log.info("======mpesa authentication started===");
 
         String appKeySecret = consumerKey + ":" + consumerSecret;
-        byte[] bytes = appKeySecret.getBytes("ISO-8859-1");
+        byte[] bytes = appKeySecret.getBytes(StandardCharsets.ISO_8859_1);
         String encoded = Base64.getEncoder().encodeToString(bytes);
-
 
         OkHttpClient client = new OkHttpClient();
 
@@ -48,24 +50,30 @@ public class MpesaApiClient {
                 .get()
                 .addHeader("authorization", "Basic "+encoded)
                 .addHeader("cache-control", "no-cache")
-
                 .build();
 
-        JSONObject jsonObject;
+        JSONObject jsonObject = null;
         try (Response response = client.newCall(request).execute()) {
-
-            assert response.body() != null;
-            jsonObject = new JSONObject(response.body().string());
+            log.info("auth response ------>{}", response);
+            if (response.isSuccessful() && response.body() != null) {
+                jsonObject = new JSONObject(response.body().string());
+                log.info("access token -----> {}", jsonObject.getString("access_token"));
+                return jsonObject.getString("access_token");
+            } else {
+                log.error("Failed to authenticate. Response code: {}", response.code());
+                throw new IOException("Failed to authenticate");
+            }
+        } catch (IOException | JSONException e) {
+            log.error("Exception occurred during authentication", e);
+            throw e;
         }
-        System.out.println(jsonObject.getString("access_token"));
-        return jsonObject.getString("access_token");
     }
 
 
     //MpesaTransactionStatus
     public MpesaResponse getTransactionStatus(MpesaTransactionStatusRequestBody requestBody) throws IOException {
 
-        RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), objectMapper.writeValueAsString(requestBody));
+        RequestBody body = RequestBody.create( objectMapper.writeValueAsString(requestBody),MediaType.parse("application/json; charset=utf-8"));
         log.info("MPESA_AUTH_TOKEN :{}",authenticate());
         log.info("request body:{}",requestBody);
 
@@ -89,7 +97,7 @@ public class MpesaApiClient {
     }
     //mpesa c2b
     public MpesaResponse getC2bTransaction(MpesaC2bRequest requestBody) throws IOException {
-        RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), objectMapper.writeValueAsString(requestBody));
+        RequestBody body = RequestBody.create(objectMapper.writeValueAsString(requestBody),MediaType.parse("application/json; charset=utf-8"));
         log.info("MPESA_AUTH_TOKEN :{}",authenticate());
         log.info("request body:{}",requestBody);
 
@@ -114,7 +122,18 @@ public class MpesaApiClient {
     }
     //STKPUsh
     public MpesaResponse sendmpesaExpressStkPush(MpesaExpressRequest requestBody) throws IOException {
-        RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), objectMapper.writeValueAsString(requestBody));
+        log.info("====STK PUSH ACTIVITIES STARTED====");
+
+        MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
+        String requestBodyJson = objectMapper.writeValueAsString(requestBody);
+
+        log.info("json -----------> {}",requestBodyJson);
+
+        RequestBody body = RequestBody.create( requestBodyJson,mediaType);
+
+
+        //RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), objectMapper.writeValueAsString(requestBody));
+
         log.info("MPESA_AUTH_TOKEN :{}",authenticate());
         log.info("request body:{}",requestBody);
 

@@ -36,7 +36,7 @@ public class MpesaController {
     @SecurityRequirement(name = "Bearer Authentication")
     public ResponseEntity<?> mpesaExpressApi(@RequestBody @Valid MpesaExpressRequest mpesaExpressRequest) throws IOException{
 
-        log.info("mpesaExpress requestBody{}",mpesaExpressRequest);
+        log.info("mpesaExpress requestBody {}",mpesaExpressRequest);
 
         return ResponseEntity.status(HttpStatus.OK).body(mpesaService.mpesaExpressStkPush(mpesaExpressRequest));
     }

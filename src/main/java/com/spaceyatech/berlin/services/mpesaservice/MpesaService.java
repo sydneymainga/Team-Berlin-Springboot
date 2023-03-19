@@ -65,16 +65,16 @@ public class MpesaService {
                     }
 
                }catch (Exception e){
-                   log.error("we were unable to retrieve transaction status because of : {}",e.getMessage());
+                   String error = "we were unable to retrieve transaction status because of : {}"+e.getMessage();
+                   log.error(error);
 
-                   assert response != null;
                    MpesaResponse responsewhenexception = MpesaResponse.builder()
 
-                           .errorCode(response.getErrorCode())
-                           .requestId(response.getRequestId())
-                           .errorMessage(response.getErrorMessage())
+                           .errorCode("0.001")
+                           .requestId("response.getRequestId()")
+                           .errorMessage(error)
                            .build();
-
+                   log.info(String.valueOf(responsewhenexception));
                    return responsewhenexception;
                    
                   // throw new RuntimeException("we were unable to retrieve transaction status : "+e.getMessage());
@@ -164,11 +164,11 @@ public class MpesaService {
         try {
             response = mpesaApiClient.sendmpesaExpressStkPush(request);
 
-            log.info("response from safaricom c2b {} : ",response);
+            log.info("response from safaricom mpesaExpressStkPush {} : ",response);
 
             if(response.getResponseCode().equals("0")){
                 //save something to db
-                log.info("response c2b : {}",response);
+                log.info("response mpesaExpressStkPush : {}",response);
                 return response;
             }else {
                 //save description and code to db
@@ -180,21 +180,22 @@ public class MpesaService {
                         .transactionStatus(response.getResponseDescription())
                         .build();
 
-                log.info("response c2b : {}",responsewhennotzero);
+                log.info("response mpesaExpressStkPush : {}",responsewhennotzero);
 
                 return responsewhennotzero;
             }
 
         }catch (Exception e){
-            log.error("we were unable to c2b trans because of : {}",e.getMessage());
+            String error = "unable to sent stk push request because of : {}"+e.getMessage();
+            log.error(error);
 
-            assert response != null;
             MpesaResponse responsewhenexception = MpesaResponse.builder()
 
-                    .errorCode(response.getErrorCode())
-                    .requestId(response.getRequestId())
-                    .errorMessage(response.getErrorMessage())
+                    .errorMessage(error)
+
                     .build();
+
+            log.info(String.valueOf(responsewhenexception));
 
             return responsewhenexception;
 
