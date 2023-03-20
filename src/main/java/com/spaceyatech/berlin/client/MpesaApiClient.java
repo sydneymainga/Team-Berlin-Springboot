@@ -20,8 +20,8 @@ import java.util.Base64;
 @Component
 public class MpesaApiClient {
 
-    String consumerKey = "vRZc7yJfyaiKXWW3IlUCZP4jRYTNpGwX";
-    String consumerSecret = "6PVMwYsk9aXJdXBt";
+    String consumerKey = "cWbCtCk8osyNgegVX9tec0ydRXrdZ3od";
+    String consumerSecret = "zise0EdkmLthZ9Uv";
 
 
     private final String MPESA_BASE_URL = "https://sandbox.safaricom.co.ke/";
