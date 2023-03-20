@@ -80,6 +80,7 @@ public class MpesaApiClient {
 
         Request request = new Request.Builder()
                 .url(MPESA_BASE_URL + "mpesa/transactionstatus/v1/query")
+                .addHeader("Content-Type", "application/json")
                 .addHeader("Authorization", "Bearer " + authenticate())
                 .post(body)
                 .build();
@@ -104,6 +105,7 @@ public class MpesaApiClient {
 
         Request request = new Request.Builder()
                 .url(MPESA_BASE_URL + "mpesa/c2b/v1/simulate")
+                .addHeader("Content-Type", "application/json")
                 .addHeader("Authorization", "Bearer " + authenticate())
                 .post(body)
                 .build();
@@ -140,7 +142,7 @@ public class MpesaApiClient {
 
         Request request = new Request.Builder()
                 .url(MPESA_BASE_URL + "mpesa/stkpush/v1/processrequest")
-                .addHeader("Content-Type", "application/json;charset=UTF-8")
+                .addHeader("Content-Type", "application/json")
                 .addHeader("Authorization", "Bearer " + authenticate())
                 .post(body)
                 .build();
