@@ -45,7 +45,7 @@ public class MpesaService {
 
                     log.info("response from safaricom {} : ",response);
 
-                    if(response.getResponseCode().equals("0")){
+                    if(response.getResponseCode()!= null && response.getResponseCode().equals("0")){
                         //save something to db
                         log.info("response : {}",response);
                         return response;
@@ -55,11 +55,14 @@ public class MpesaService {
 
 
                         MpesaResponse responsewhennotzero = MpesaResponse.builder()
-                                .responseCode(response.getResponseCode())
-                                .transactionStatus(response.getResponseDescription())
+                                .requestId(response.getRequestId())
+                                .errorCode(response.getErrorCode())
+                                .errorMessage(response.getErrorMessage())
                                 .build();
 
-                        log.info("response : {}",responsewhennotzero);
+                        log.info("response mpesaExpressStkPush : {} :{} :{}",responsewhennotzero.getRequestId(),responsewhennotzero.getErrorCode(),responsewhennotzero.getErrorMessage());
+
+
 
                         return responsewhennotzero;
                     }
@@ -103,7 +106,7 @@ public class MpesaService {
 
             log.info("response from safaricom c2b {} : ",response);
 
-            if(response.getResponseCode().equals("0")){
+            if(response.getResponseCode()!= null && response.getResponseCode().equals("0")){
                 //save something to db
                 log.info("response c2b : {}",response);
                 return response;
@@ -112,10 +115,15 @@ public class MpesaService {
 
 
 
+
                 MpesaResponse responsewhennotzero = MpesaResponse.builder()
-                        .responseCode(response.getResponseCode())
-                        .transactionStatus(response.getResponseDescription())
+                        .requestId(response.getRequestId())
+                        .errorCode(response.getErrorCode())
+                        .errorMessage(response.getErrorMessage())
                         .build();
+
+                log.info("response mpesaExpressStkPush : {} :{} :{}",responsewhennotzero.getRequestId(),responsewhennotzero.getErrorCode(),responsewhennotzero.getErrorMessage());
+
 
                 log.info("response c2b : {}",responsewhennotzero);
 
