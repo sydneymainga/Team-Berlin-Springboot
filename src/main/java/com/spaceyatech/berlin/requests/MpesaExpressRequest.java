@@ -15,10 +15,10 @@ public class MpesaExpressRequest {
     private String password;
     private String timestamp;
     private String transactionType;
-    private String amount;
-    private String partyA;
+    private int amount;
+    private int partyA;
     private int partyB;
-    private String phoneNumber;
+    private int phoneNumber;
     private String callBackURL;
     private String accountReference;
     private String transactionDesc;
