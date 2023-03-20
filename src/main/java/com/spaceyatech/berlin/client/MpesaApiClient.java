@@ -140,12 +140,17 @@ public class MpesaApiClient {
         log.info("request body:{}",requestBody);
 
 
-        Request request = new Request.Builder()
+       /* Request request = new Request.Builder()
                 .url(MPESA_BASE_URL + "mpesa/stkpush/v1/processrequest")
                 .addHeader("Content-Type", "application/json")
-                .addHeader("Host","sandbox.safaricom.co.ke")
                 .addHeader("Authorization", "Bearer " + authenticate())
                 .post(body)
+                .build();*/
+        Request request = new Request.Builder()
+                .url(MPESA_BASE_URL + "mpesa/stkpush/v1/processrequest")
+                .method("POST", body)
+                .addHeader("Content-Type", "application/json")
+                .addHeader("Authorization", "Bearer " + authenticate())
                 .build();
 
 
