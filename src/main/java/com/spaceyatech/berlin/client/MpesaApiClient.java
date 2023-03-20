@@ -140,7 +140,7 @@ public class MpesaApiClient {
 
         Request request = new Request.Builder()
                 .url(MPESA_BASE_URL + "mpesa/stkpush/v1/processrequest")
-                .addHeader("Content-Type", "application/json")
+                .addHeader("Content-Type", "application/json;charset=UTF-8")
                 .addHeader("Authorization", "Bearer " + authenticate())
                 .post(body)
                 .build();
