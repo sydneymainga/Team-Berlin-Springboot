@@ -168,7 +168,7 @@ public class MpesaService {
 
             log.info("response from safaricom mpesaExpressStkPush {} : ",response);
 
-            if(response.getResponseCode().equals("0") && response.getResponseCode()!=null){
+            if( response.getResponseCode()!= null && response.getResponseCode().equals("0")){
                 //save something to db
                 log.info("response mpesaExpressStkPush : {}",response);
                 return response;
