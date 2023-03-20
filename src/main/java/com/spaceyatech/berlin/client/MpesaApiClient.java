@@ -61,7 +61,7 @@ public class MpesaApiClient {
                 return jsonObject.getString("access_token");
             } else {
                 log.error("Failed to authenticate. Response code: {}", response.code());
-                throw new IOException("Failed to authenticate");
+                throw new IOException("Failed to authenticate with Response code : "+response.code());
             }
         } catch (IOException | JSONException e) {
             log.error("Exception occurred during authentication", e);
