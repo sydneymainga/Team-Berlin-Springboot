@@ -178,11 +178,12 @@ public class MpesaService {
 
 
                 MpesaResponse responsewhennotzero = MpesaResponse.builder()
-                        .responseCode(response.getResponseCode())
-                        .transactionStatus(response.getResponseDescription())
+                        .requestId(response.getRequestId())
+                        .errorCode(response.getErrorCode())
+                        .errorMessage(response.getErrorMessage())
                         .build();
 
-                log.info("response mpesaExpressStkPush : {}",responsewhennotzero);
+                log.info("response mpesaExpressStkPush : {} :{} :{}",responsewhennotzero.getRequestId(),responsewhennotzero.getErrorCode(),responsewhennotzero.getErrorMessage());
 
                 return responsewhennotzero;
             }
