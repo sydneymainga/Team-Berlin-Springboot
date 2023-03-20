@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 
 @Service
 @Slf4j
@@ -153,11 +155,20 @@ public class MpesaService {
 
     public MpesaResponse mpesaExpressStkPush(MpesaExpressRequest mpesaExpressRequest) throws IOException{
 
+        String shortcode = "174379";
+        String passkey = "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919";
+        long timestamp = System.currentTimeMillis();
+
+        String concatenatedString = shortcode + passkey + timestamp;
+        String base64EncodedPassword = Base64.getEncoder().encodeToString(concatenatedString.getBytes(StandardCharsets.UTF_8));
+
+        System.out.println("Base64 encoded password: " + base64EncodedPassword);
+
             MpesaExpressRequest request = MpesaExpressRequest.builder()
 
                     .businessShortCode(mpesaExpressRequest.getBusinessShortCode())
-                    .password(mpesaExpressRequest.getPassword())
-                    .timestamp(mpesaExpressRequest.getTimestamp())
+                    .password(base64EncodedPassword)
+                    .timestamp(String.valueOf(timestamp))
                     .transactionType(mpesaExpressRequest.getTransactionType())
                     .amount(mpesaExpressRequest.getAmount())
                     .partyA(mpesaExpressRequest.getPartyA())
